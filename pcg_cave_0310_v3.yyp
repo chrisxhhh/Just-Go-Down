@@ -12,6 +12,7 @@
     {"id":{"name":"cellular_automata","path":"scripts/cellular_automata/cellular_automata.yy",},"order":0,},
     {"id":{"name":"cave_tileset","path":"tilesets/cave_tileset/cave_tileset.yy",},"order":0,},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},"order":5,},
+    {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":6,},
     {"id":{"name":"spr_square_white","path":"sprites/spr_square_white/spr_square_white.yy",},"order":0,},
     {"id":{"name":"cave_tileset_10","path":"tilesets/cave_tileset_10/cave_tileset_10.yy",},"order":1,},
     {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},"order":1,},
