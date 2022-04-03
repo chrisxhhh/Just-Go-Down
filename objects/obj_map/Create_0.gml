@@ -46,17 +46,20 @@ spawn_square = function(_map, _ground = false) {
 }
 
 spawn_wall = function(_map) {
+	show_debug_message("start spawn walls: " + string(current_time))
 	instance_destroy(obj_wall);
 	var _spacing = sprite_get_width(spr_square_wall);
-	show_debug_message(_spacing);
+	//show_debug_message(_spacing);
 	for (var col = 0; col < 98; ++col) {
 		for (var row = 0; row < 98; ++row) {
 			//show_debug_message(string(col)+" , "+string(row))
 			if (_map.final[col][row] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing +98*32*(current_level+1), layer, obj_wall);
 				instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			}
 		}
 	}
+	show_debug_message("end spawn walls: " + string(current_time))
 }
 
 create_map = function(_map, _ground = false) {
@@ -97,16 +100,21 @@ goto_level = function(_level) {
 
 ite				= 0;
 ite_rdy			= true;
-num_iterations	= 30;
+num_iterations	= 25;
 current_level	= 0;
 all_maps		= array_create(32, noone);
-loadCnt = -1;
+loadCnt = num_iterations+1; //not generateing if larger than num_iteration
+map_loaded = false
+loading = false
 px = 0;
 py = 0;
 randomize();
 all_maps[0] = new cellular_automata(128, 128, 0.50, all_maps[0]);
+show_debug_message("start iteration: " + string(current_time))
 all_maps[0].iterate(num_iterations);
+show_debug_message("covert to binary map: " + string(current_time))
 all_maps[0].get_final_map(true);
+show_debug_message("finish coverting binary map: " + string(current_time))
 //spawn_square(all_maps[0], true);
 spawn_wall(all_maps[0]);
 

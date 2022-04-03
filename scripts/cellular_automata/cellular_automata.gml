@@ -8,6 +8,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	special_y	= irandom_range(43, 83);
 	prev		= _prev;
 	
+	show_debug_message("starting celluar_automata: " + string(current_time))
 	//create initial grid in a nested array with initial value 0
 	map = array_create(width, 0);
 	for (var i = 0; i < width; ++i) {
@@ -23,6 +24,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	for (var i = 0; i < 98; ++i) {
 		initial[i] = array_create(98, 0);
 	}
+	show_debug_message("created three arrays: " + string(current_time))
 	
 	//First room generation
 	if (_prev == noone) {
@@ -62,6 +64,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 		}
 		
 	}
+	show_debug_message("copied previous map: " + string(current_time))
 	
 	static get_final_map = function(_ground = false) {
 		for (var col = 0; col < 98; col++) {
@@ -117,10 +120,12 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			//draw_text(100, 30, "Loading: " + string(cnt/_num));
 			//global.loadCnt++;
 			//create next generation map
+			//show_debug_message("start " + string(_num)+ " iteration: " + string(current_time))
 			var _new_map = array_create(width, 0);
 			for (var i = 0; i < width; ++i) {
 				_new_map[i] = array_create(height, 0);	
 			}
+			/*
 			//show_debug_message("1")
 			//pcg!!
 			for(var col = 0; col < width; ++col) {
@@ -162,25 +167,71 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 					
 				}
 			}
+			*/
+			for(var col = 0; col < width; ++col) {
+				for (var row = 0; row < height; ++row) {
+					//check neighbors
+					var _col_dif, _row_dif, _count;
+					_count = 0
+					for(var col_offset = -1; col_offset < 2; ++col_offset) {
+						for(var row_offset = -1; row_offset < 2; ++row_offset) {
+							//this two value find the position of the neighbor
+							_col_dif = col + col_offset;
+							_row_dif = row + row_offset;
+							if not (_col_dif < 0 || _col_dif >= width || _row_dif < 0 || _row_dif >= height) {
+								//out of boundary, dont check
+								_count += map[_col_dif][_row_dif];
+							//} else if (col_offset == 0 && row_offset == 0) {
+								//checking self
+							//	continue;
+							} 
+							
+						}
+					}
+					var _self = map[col][row];
+					//avg value of neighbors and remove self
+					_count = (_count - _self)/8;
+					
+					//_count /= 8;
+
+					//apply rules to each cell
+					//can be tested and changed later
+					if (_count < 40) {
+						//if average < 40, self approaches to average
+						_new_map[col][row] = _self + (random(_count - _self));
+					} else if (_self > _count) {
+						//if self > average, self +- random(10)
+						_new_map[col][row] = _self + (random_range(-10, 10));
+					} else {
+						//if self < average and count > 40, self + random(average/5)
+						_new_map[col][row] = _self + (random(_count/5));
+					}
+					
+				}
+			}
 			
+			//creating special empty room
 			if (prev == noone) {
 				for (var col = width - 5; col >= 5; --col) {
 					for (var row = width - 45; row >= 5; --row) {
 						if _new_map[col][row] >= 110 _new_map[col][row] = 110;
+						//clamp(_new_map[col][row],0, 110)
 					}
 				}
 			} else {
 				for (var col = special_x - 10; col < special_x + 10; ++col) {
 					for (var row = special_y - 10; row < special_y + 10; ++row) {
 						if _new_map[col][row] >= 110 _new_map[col][row] = 110;
+						//clamp(_new_map[col][row],0, 110)
 					}
 				}
 			}
 			
 			
-			//show_debug_message("2")
+			
 			//replace the old map with the new generation
 			map = _new_map;
+			//show_debug_message("end " + string(_num)+ " iteration: " + string(current_time))
 			
 		}
 		//global.loadCnt = -1;
