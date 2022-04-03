@@ -1,5 +1,3 @@
-/// @description Insert description here
-// You can write your code in this editor
 
 //if (keyboard_check(vk_space) && ite_rdy) {
 //	instance_destroy(obj_square)
@@ -19,6 +17,7 @@
 //}
 
 /*
+//legacy map genration after first map
 if(loadCnt>=0){
 	if(loadCnt<30){
 		//all_maps[current_level] = new cellular_automata(128, 128, 0.50, all_maps[current_level - 1]);
@@ -76,34 +75,33 @@ else{
 }
 */
 
-if(obj_player.y>98*32) and loading == false {
+#region generating new map
+if(obj_player.y>90*32) and all_maps[current_level+1] == noone {
 	loadCnt = 0; //start to generate next map
-	loading = true
 }
 show_debug_message(string(loadCnt))
 if loadCnt == 0{
-	++current_level;
 	
-	all_maps[current_level] = new cellular_automata(128, 128, 0.50, all_maps[current_level - 1]);
-	
-	
+	//creating the initial 2d arrays for next map
+	all_maps[current_level+1] = new cellular_automata(128, 128, 0.50, all_maps[current_level])	
 		
 }else if loadCnt < num_iterations{
-	all_maps[current_level].iterate(1)
+	//in each frame, iterate once
+	all_maps[current_level+1].iterate(1)
 }else if loadCnt == num_iterations{
-	px = obj_player.x;
-	py = obj_player.y;
-	//instance_destroy(obj_player);
+	//when finished all iteration, covert to binary map
 	map_loaded = true
-	all_maps[current_level].get_final_map(true);
-	loading = false
-	
-}
-loadCnt += 1
-loadCnt = clamp(loadCnt,0,num_iterations+1)
+	all_maps[current_level+1].get_final_map(true);
 
+}
+
+loadCnt += 1
+loadCnt = clamp(loadCnt,0,num_iterations+1) //restrict loadCnt btw 0 and iteration+1
+
+//when player reach the bottom of the current map, spawn the next map and move palyer to top again
 if obj_player.y>98*32{
 	if map_loaded{
+		++current_level;
 		spawn_wall(all_maps[current_level]);
 		obj_player.y = 78*32;
 		map_loaded = false
@@ -112,5 +110,4 @@ if obj_player.y>98*32{
 	}
 	
 }
-
-
+#endregion

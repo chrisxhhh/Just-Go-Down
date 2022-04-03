@@ -15,6 +15,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 		map[i] = array_create(height, 0);
 	}
 	
+	//create a 2d array to save initial state
 	initial = array_create(width, 0);
 	for (var i = 0; i < width; ++i) {
 		initial[i] = array_create(height, 0);
@@ -41,7 +42,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	
 	//Later room generation
 	else {
-		
+		//copy the initial state of bottom 32 rows of old map to top 32 rows of new map
 		for (var col = width - 5; col >= 5; --col) {
 			for (var row = 37; row >= 5; --row) {
 				map[col][row] = prev.initial[col][width - row];
@@ -49,6 +50,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			}
 		}
 		
+		//randomize the rest of map
 		for (var col = width - 5; col >= 5; --col) {
 			for (var row = height - 5; row >= 38; --row) {
 				map[col][row] = random(1) <= _spawn_chance ? 60 : 10;
@@ -56,7 +58,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			}
 		}
 	
-	
+		//save speical room
 		for (var col = special_x - 5; col < special_x + 5; ++col) {
 			for (var row = special_y - 5; row < special_y + 5; ++row) {
 				map[col][row] = 70;
@@ -66,6 +68,8 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	}
 	show_debug_message("copied previous map: " + string(current_time))
 	
+	//covert to binary map
+	//1 is empty, 0 is solid
 	static get_final_map = function(_ground = false) {
 		for (var col = 0; col < 98; col++) {
 			for (var row = 0; row < 98; row++) {
@@ -115,16 +119,14 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	//where PCG actually happen
 	//this function will repeat _num times
 	static iterate = function(_num = 1) {
-		//global.loadCnt = 0;
 		repeat(_num){
-			//draw_text(100, 30, "Loading: " + string(cnt/_num));
-			//global.loadCnt++;
+
 			//create next generation map
-			//show_debug_message("start " + string(_num)+ " iteration: " + string(current_time))
 			var _new_map = array_create(width, 0);
 			for (var i = 0; i < width; ++i) {
 				_new_map[i] = array_create(height, 0);	
 			}
+			#region legacy genrating algo
 			/*
 			//show_debug_message("1")
 			//pcg!!
@@ -168,6 +170,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 				}
 			}
 			*/
+			#endregion
 			for(var col = 0; col < width; ++col) {
 				for (var row = 0; row < height; ++row) {
 					//check neighbors
@@ -179,21 +182,17 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 							_col_dif = col + col_offset;
 							_row_dif = row + row_offset;
 							if not (_col_dif < 0 || _col_dif >= width || _row_dif < 0 || _row_dif >= height) {
-								//out of boundary, dont check
+								// sum neighbor values including self
 								_count += map[_col_dif][_row_dif];
-							//} else if (col_offset == 0 && row_offset == 0) {
-								//checking self
-							//	continue;
 							} 
 							
 						}
 					}
 					var _self = map[col][row];
+					
 					//avg value of neighbors and remove self
 					_count = (_count - _self)/8;
 					
-					//_count /= 8;
-
 					//apply rules to each cell
 					//can be tested and changed later
 					if (_count < 40) {
@@ -205,8 +204,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 					} else {
 						//if self < average and count > 40, self + random(average/5)
 						_new_map[col][row] = _self + (random(_count/5));
-					}
-					
+					}			
 				}
 			}
 			
@@ -231,10 +229,8 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			
 			//replace the old map with the new generation
 			map = _new_map;
-			//show_debug_message("end " + string(_num)+ " iteration: " + string(current_time))
 			
 		}
-		//global.loadCnt = -1;
 	}
 	
 }
