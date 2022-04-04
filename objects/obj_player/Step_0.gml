@@ -82,3 +82,10 @@ if (vspd < 0) {
 x += hspd; 
 y += vspd; 
 if (vspd == 0) y += grav * !collided_bottom;
+
+cooldown = cooldown - 1;
+if (mouse_check_button(mb_left)) && (cooldown < 1)
+{
+    instance_create_layer(x, y, "bullet", obj_bullet);
+    cooldown = 30;
+}

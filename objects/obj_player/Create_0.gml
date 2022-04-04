@@ -18,3 +18,5 @@ empty_tile = 166;
 
 dig_rdy = true;
 dig_timer = 1 * room_speed;
+
+cooldown = 0;
