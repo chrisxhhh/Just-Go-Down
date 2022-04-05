@@ -104,7 +104,8 @@ num_iterations	= 25;
 current_level	= 0;
 all_maps		= array_create(32, noone);
 loadCnt = num_iterations+1; //not generateing if larger than num_iteration
-map_loaded = false
+map_loaded = false;
+max_level = 0;
 randomize();
 
 #region initialize first map
