@@ -93,8 +93,10 @@ if loadCnt == 0{
 }else if loadCnt == num_iterations{
 	//when finished all iteration, create empty square room and covert to binary map
 	map_loaded = true
+
 	all_maps[current_level+1].create_room();
-	all_maps[current_level+1].get_final_map(true);
+	all_maps[current_level+1].get_final_map();
+	max_level += 1
 
 }
 
@@ -106,17 +108,27 @@ if line > 127{
 	line = 0
 }
 loadCnt = clamp(loadCnt,0,num_iterations+1) //restrict loadCnt btw 0 and iteration+1
-
+if current_level < max_level {
+	map_loaded = true;	
+}
 //when player reach the bottom of the current map, spawn the next map and move palyer to top again
 if obj_player.y>98*32{
 	if map_loaded{
 		++current_level;
 		spawn_wall(all_maps[current_level]);
-		obj_player.y = 0;
-		map_loaded = false
+
+		obj_player.y = 16;
+		if current_level == max_level{
+			map_loaded = false
+		}
 	} else{
-		obj_player.y = 98*32+16
+		obj_player.y = 98*32
 	}
 	
+}
+else if obj_player.y <= 0 {
+	current_level--;
+	spawn_wall(all_maps[current_level]);
+	obj_player.y = 98*32;
 }
 #endregion

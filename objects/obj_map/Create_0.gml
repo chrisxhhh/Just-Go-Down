@@ -94,7 +94,6 @@ spawn_wall = function(_map) {
 			if (_map.final[col][row] == 0){
 				instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			}
-			
 		}
 	}
 	show_debug_message("end spawn walls: " + string(current_time))
@@ -106,7 +105,8 @@ current_level	= 0;
 all_maps		= array_create(32, noone);
 loadCnt			= num_iterations+1; //not generateing if larger than num_iteration
 line			= 0
-map_loaded = false
+map_loaded = false;
+max_level = 0;
 randomize();
 
 #region initialize first map
