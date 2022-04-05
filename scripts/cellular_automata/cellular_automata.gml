@@ -15,6 +15,11 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 		map[i] = array_create(height, 0);
 	}
 	
+	new_map = array_create(width, 0);
+	for (var i = 0; i < width; ++i) {
+		new_map[i] = array_create(height, 0);
+	}
+	
 	//create a 2d array to save initial state
 	initial = array_create(width, 0);
 	for (var i = 0; i < width; ++i) {
@@ -25,7 +30,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	for (var i = 0; i < 98; ++i) {
 		initial[i] = array_create(98, 0);
 	}
-	show_debug_message("created three arrays: " + string(current_time))
+	show_debug_message("created four arrays: " + string(current_time))
 	
 	//First room generation
 	if (_prev == noone) {
@@ -42,6 +47,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	
 	//Later room generation
 	else {
+		
 		//copy the initial state of bottom 32 rows of old map to top 32 rows of new map
 		for (var col = width - 5; col >= 5; --col) {
 			for (var row = 37; row >= 5; --row) {
@@ -74,7 +80,8 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 		for (var col = 0; col < 98; col++) {
 			for (var row = 0; row < 98; row++) {
 				if (_ground) {
-					if (row <= 78) {
+					
+					if (row <= 78 and prev==noone) {
 						final[col][row] = 1;	
 					} else if (row > 78 && row < 88) {
 						if (map[col + 15][row + 15] <= 105 && map[col + 15][row + 15] > 75) {
@@ -115,7 +122,80 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	}
 	
 	
+	#region iteration 16 line per frame
+	static iterate_line = function(_num = 1,_line) {
+		repeat(_num){
+
+			
+			
+
+			
+			for (var line = _line; line < _line+16; ++line){
+				
+				for (var row = 0; row < height; ++row) {
+					//show_debug_message("line:" + string(row))
+					//check neighbors
+					var _col_dif, _row_dif, _count;
+					_count = 0
+					for(var col_offset = -1; col_offset < 2; ++col_offset) {
+						for(var row_offset = -1; row_offset < 2; ++row_offset) {
+							//this two value find the position of the neighbor
+							_col_dif = line + col_offset;
+							_row_dif = row + row_offset;
+							if not (_col_dif < 0 || _col_dif >= width || _row_dif < 0 || _row_dif >= height) {
+								// sum neighbor values including self
+								
+								_count += map[_col_dif][_row_dif];
+							} 	
+						}
+					}
+					var _self = map[line][row];
+					
+					//avg value of neighbors and remove self
+					_count = (_count - _self)/8;
+					
+					//apply rules to each cell
+					//can be tested and changed later
+					if (_count < 40) {
+						//if average < 40, self approaches to average
+						new_map[line][row] = _self + (random(_count - _self));
+					} else if (_self > _count) {
+						//if self > average, self +- random(10)
+						new_map[line][row] = _self + (random_range(-10, 10));
+					} else {
+						//if self < average and count > 40, self + random(average/5)
+						new_map[line][row] = _self + (random(_count/5));
+					}			
+				
+				}
+			}
+			
+			//replace the old map with the new generation
+			if line == 112{
+				map = new_map
+				
+			}
+			
+			
+			
+			
+		}
+	}
+	#endregion
 	
+	//creating special empty room
+	static create_room= function(){
+			
+		for (var col = special_x - 10; col < special_x + 10; ++col) {
+			for (var row = special_y - 10; row < special_y + 10; ++row) {
+				if map[col][row] >= 110 map[col][row] = 110;
+				//clamp(_new_map[col][row],0, 110)
+			}
+		}
+			
+	}
+	
+	#region iteration as whole
 	//where PCG actually happen
 	//this function will repeat _num times
 	static iterate = function(_num = 1) {
@@ -126,6 +206,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			for (var i = 0; i < width; ++i) {
 				_new_map[i] = array_create(height, 0);	
 			}
+			
 			#region legacy genrating algo
 			/*
 			//show_debug_message("1")
@@ -171,6 +252,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			}
 			*/
 			#endregion
+			
 			for(var col = 0; col < width; ++col) {
 				for (var row = 0; row < height; ++row) {
 					//check neighbors
@@ -232,5 +314,6 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 			
 		}
 	}
+	#endregion
 	
 }

@@ -10,11 +10,14 @@ if (!game_over) {
 		player_depth = 20 + 100 * (current_level - 1) + round(obj_player.y / 16); 
 	}
 	
+	/*
+	//this part is now moved into obj_map step
 	if (obj_player.y > room_height - 16) {
 		current_level++;
 		obj_player.y = 16;
 		obj_map.goto_level(current_level);
 	}
+	*/
 }
 
 

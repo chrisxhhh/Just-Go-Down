@@ -76,8 +76,9 @@ else{
 */
 
 #region generating new map
-if(obj_player.y>90*32) and all_maps[current_level+1] == noone {
+if(obj_player.y>48*32) and all_maps[current_level+1] == noone {
 	loadCnt = 0; //start to generate next map
+	line = 0
 }
 show_debug_message(string(loadCnt))
 if loadCnt == 0{
@@ -86,16 +87,24 @@ if loadCnt == 0{
 	all_maps[current_level+1] = new cellular_automata(128, 128, 0.50, all_maps[current_level])	
 		
 }else if loadCnt < num_iterations{
-	//in each frame, iterate once
-	all_maps[current_level+1].iterate(1)
+	//in each frame, iterate once, update 16 lines to new_map
+	all_maps[current_level+1].iterate_line(1,line)
+	
 }else if loadCnt == num_iterations{
-	//when finished all iteration, covert to binary map
+	//when finished all iteration, create empty square room and covert to binary map
 	map_loaded = true
+	all_maps[current_level+1].create_room();
 	all_maps[current_level+1].get_final_map(true);
 
 }
 
-loadCnt += 1
+line += 16
+
+
+if line > 127{
+	loadCnt += 1
+	line = 0
+}
 loadCnt = clamp(loadCnt,0,num_iterations+1) //restrict loadCnt btw 0 and iteration+1
 
 //when player reach the bottom of the current map, spawn the next map and move palyer to top again
@@ -103,10 +112,10 @@ if obj_player.y>98*32{
 	if map_loaded{
 		++current_level;
 		spawn_wall(all_maps[current_level]);
-		obj_player.y = 78*32;
+		obj_player.y = 0;
 		map_loaded = false
 	} else{
-		obj_player.y = 98*32
+		obj_player.y = 98*32+16
 	}
 	
 }
