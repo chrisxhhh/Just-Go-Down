@@ -192,6 +192,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 				//clamp(_new_map[col][row],0, 110)
 			}
 		}
+		
 			
 	}
 	

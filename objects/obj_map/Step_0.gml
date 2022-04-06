@@ -95,7 +95,7 @@ if loadCnt == 0{
 	map_loaded = true
 
 	all_maps[current_level+1].create_room();
-	all_maps[current_level+1].get_final_map();
+	all_maps[current_level+1].get_final_map(true);
 	max_level += 1
 
 }
@@ -117,7 +117,7 @@ if obj_player.y>98*32{
 		++current_level;
 		spawn_wall(all_maps[current_level]);
 
-		obj_player.y = 16;
+		obj_player.y = 8;
 		if current_level == max_level{
 			map_loaded = false
 		}
