@@ -28,7 +28,8 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	
 	final = array_create(98, 0);
 	for (var i = 0; i < 98; ++i) {
-		initial[i] = array_create(98, 0);
+		//initial[i] = array_create(98, 0);
+		final[i] = array_create(98, 0);
 	}
 	show_debug_message("created four arrays: " + string(current_time))
 	

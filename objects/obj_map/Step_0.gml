@@ -76,28 +76,32 @@ else{
 */
 
 #region generating new map
-if(obj_player.y>48*32) and all_maps[current_level+1] == noone {
+if(obj_player.y>48*32+current_level*98*32) and all_maps[current_level+1] == noone {
 	loadCnt = 0; //start to generate next map
 	line = 0
 }
 show_debug_message(string(loadCnt))
-if loadCnt == 0{
+if loadCnt == 0 and line==0{
 	
 	//creating the initial 2d arrays for next map
 	all_maps[current_level+1] = new cellular_automata(128, 128, 0.50, all_maps[current_level])	
+	max_level++;
 		
 }else if loadCnt < num_iterations{
 	//in each frame, iterate once, update 16 lines to new_map
-	all_maps[current_level+1].iterate_line(1,line)
+	show_debug_message("max_level:")
+	show_debug_message(max_level);
+	all_maps[max_level].iterate_line(1,line)
 	
 }else if loadCnt == num_iterations{
 	//when finished all iteration, create empty square room and covert to binary map
 	map_loaded = true
 
-	all_maps[current_level+1].create_room();
-	all_maps[current_level+1].get_final_map(true);
-	max_level += 1
-
+	all_maps[max_level].create_room();
+	//all_maps[max_level].get_final_map(true);
+	all_maps[max_level].get_final_map();
+	//max_level += 1
+	
 }
 
 line += 16
@@ -108,7 +112,24 @@ if line > 127{
 	line = 0
 }
 loadCnt = clamp(loadCnt,0,num_iterations+1) //restrict loadCnt btw 0 and iteration+1
-if current_level < max_level {
+if map_loaded {
+	//spawn_wall(all_maps[max_level]);
+	map_loaded = false;
+}
+if(keyboard_check(ord("W")) || keyboard_check(vk_space)){
+	dynamic_spawn_up();
+}
+else{
+	dynamic_spawn_down();
+}
+
+if obj_player.y>98*32 + current_level*98*32{
+	current_level++;
+}
+else if obj_player.y <= current_level*98*32{
+	current_level--;
+}
+/*if current_level < max_level {
 	map_loaded = true;	
 }
 //when player reach the bottom of the current map, spawn the next map and move palyer to top again
@@ -130,5 +151,5 @@ else if obj_player.y <= 0 {
 	current_level--;
 	spawn_wall(all_maps[current_level]);
 	obj_player.y = 98*32;
-}
+}*/
 #endregion
