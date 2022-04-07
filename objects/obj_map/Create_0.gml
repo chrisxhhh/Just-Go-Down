@@ -136,6 +136,19 @@ dynamic_spawn_down = function(){
 			id_map[i][(r+load_dist+1)] = iid;
 			create_map[i][r+load_dist+1] = 1;
 		}
+		
+		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 2 and create_map[i][r+load_dist] == 0){
+			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+			var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_monster1);
+			id_map[i][(r+load_dist)] = iid;
+			create_map[i][r+load_dist] = 1;
+		}
+		if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 2 and create_map[i][r+load_dist+1] == 0){
+			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+			var iid = instance_create_layer(i * _spacing,(r+load_dist+1) * _spacing, layer, obj_monster1);
+			id_map[i][(r+load_dist+1)] = iid;
+			create_map[i][r+load_dist+1] = 1;
+		}
 	}
 }
 
@@ -165,6 +178,19 @@ dynamic_spawn_up = function(){
 		if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 0 and create_map[i][r-load_dist-1] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_wall);
+			id_map[i][(r-load_dist-1)] = iid;
+			create_map[i][r-load_dist-1] = 1;
+		}
+		
+		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 2 and create_map[i][r-load_dist] == 0){
+			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+			var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
+			id_map[i][(r-load_dist)] = iid;
+			create_map[i][r-load_dist] = 1;
+		}
+		if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 2 and create_map[i][r-load_dist-1] == 0){
+			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+			var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_monster1);
 			id_map[i][(r-load_dist-1)] = iid;
 			create_map[i][r-load_dist-1] = 1;
 		}
