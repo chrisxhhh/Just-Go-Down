@@ -1,4 +1,10 @@
 
+/*var lay_id = layer_get_id("Tiles_Ground");
+var map_id = layer_tilemap_get_id(lay_id);
+var data = tilemap_get(map_id, 4, 0);
+tile_set_flip(data, true);
+tilemap_set_at_pixel(map_id, 4, obj_player.x, obj_player.y);
+*/
 
 //spawn_square = function(_map, _ground = false) {
 //	instance_destroy(obj_square)
