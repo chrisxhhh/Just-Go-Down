@@ -2,7 +2,7 @@
 mspd = 3; 
 hspd = 0; 
 vspd = 0;
-
+prevspd = 0;
 
 grav = 5;
 

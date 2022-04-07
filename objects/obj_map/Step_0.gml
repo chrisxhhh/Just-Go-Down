@@ -122,6 +122,12 @@ if(keyboard_check(ord("W")) || keyboard_check(vk_space)){
 else{
 	dynamic_spawn_down();
 }
+/*if(obj_player.vspd<0){
+	dynamic_spawn_up();
+}
+else{
+	dynamic_spawn_down();
+}*/
 
 if obj_player.y>98*32 + current_level*98*32{
 	current_level++;

@@ -87,8 +87,11 @@ if (vspd < 0) {
 }
 //show_debug_message(hspd);
 x += hspd; 
-y += vspd; 
-if (vspd == 0) y += grav * !collided_bottom;
+if(prevspd==vspd){
+	y += vspd;
+}
+
+if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
 
 cooldown = cooldown - 1;
 if (mouse_check_button(mb_left)) && (cooldown < 1)
@@ -96,3 +99,4 @@ if (mouse_check_button(mb_left)) && (cooldown < 1)
     instance_create_layer(x, y, "bullet", obj_bullet);
     cooldown = 30;
 }
+prevspd = vspd;
