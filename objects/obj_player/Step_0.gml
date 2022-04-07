@@ -40,10 +40,11 @@ if (place_meeting(x, y+sprite_yoffset+3,obj_wall)) {
 
 //show_debug_message("collided_bottom = " + string(collided_bottom)); 
 
-var _collided = tilemap_get_at_pixel(tilemapID, x, y) != empty_tile;
+//var _collided = tilemap_get_at_pixel(tilemapID, x, y) != empty_tile;
+var inst_id = instance_position(x, y+sprite_yoffset+9, obj_wall);
 
 if (dig_rdy) {
-	if (_collided && keyboard_check(vk_down)) {
+	/*if (_collided && keyboard_check(vk_down)) {
 		dig_rdy = false;
 		alarm[0] = dig_timer;
 		tilemap_set(tilemapID, 166, floor(x/16), floor(y/16));
@@ -59,6 +60,12 @@ if (dig_rdy) {
 		dig_rdy = false;
 		alarm[0] = dig_timer;
 		tilemap_set(tilemapID, 166, floor(x/16) + 1, floor(y/16));
+	}*/
+	if(inst_id != noone and keyboard_check(ord("F"))){
+		instance_destroy(inst_id);
+		var rw = (y+sprite_yoffset+9) div 32;
+		var cl = x div 32;
+		obj_map.all_maps[rw div 98].final[cl][rw mod 98] = 1;
 	}
 }
 
