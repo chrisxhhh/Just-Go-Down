@@ -25,6 +25,7 @@
     {"id":{"name":"obj_square","path":"objects/obj_square/obj_square.yy",},"order":0,},
     {"id":{"name":"spr_cave_tiles10","path":"sprites/spr_cave_tiles10/spr_cave_tiles10.yy",},"order":2,},
     {"id":{"name":"spr_slime_1","path":"sprites/spr_slime_1/spr_slime_1.yy",},"order":8,},
+    {"id":{"name":"spr_wall1","path":"sprites/spr_wall1/spr_wall1.yy",},"order":15,},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":2,},
     {"id":{"name":"spr_cave_tiles32","path":"sprites/spr_cave_tiles32/spr_cave_tiles32.yy",},"order":4,},
     {"id":{"name":"cellular","path":"scripts/cellular/cellular.yy",},"order":3,},
