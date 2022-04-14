@@ -6,7 +6,8 @@ prevspd = 0;
 
 grav = 5;
 
-TlayerID = layer_get_id("Tiles_Floor"); 
+//TlayerID = layer_get_id("Tiles_Floor"); 
+TlayerID = layer_get_id("Tiles_Ground"); 
 tilemapID = layer_tilemap_get_id(TlayerID); 
 
 collided_top = false; 
@@ -14,7 +15,10 @@ collided_bottom = false;
 collided_left = false; 
 collided_right = false; 
 
-empty_tile = 166;
+
+
+//empty_tile = 166;
+empty_tile = 0;
 
 dig_rdy = true;
 dig_timer = 1 * room_speed;

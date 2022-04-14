@@ -12,20 +12,24 @@ if (tile_ind < 0) {
 	show_debug_message("failed to check for collision here, index = "+string(tile_ind)); 	
 } 
 
-/*if (tilemap_get_at_pixel(tilemapID, x-sprite_xoffset-3, y) != empty_tile) {
+if (tilemap_get_at_pixel(tilemapID, x-sprite_xoffset-3, y) != empty_tile) {
 	collided_left = true; 
+	show_debug_message("left");
 } else collided_left =false;
 if (tilemap_get_at_pixel(tilemapID, x+sprite_xoffset+3, y) != empty_tile ) {
 	collided_right = true; 
+	show_debug_message("right");
 } else collided_right =false;
 if (tilemap_get_at_pixel(tilemapID, x, y-sprite_yoffset-3) != empty_tile) {
 	collided_top = true; 
+	show_debug_message("top");
 } else collided_top =false;
 if (tilemap_get_at_pixel(tilemapID, x, y+sprite_yoffset+3) != empty_tile) {
 	collided_bottom = true; 
+	show_debug_message("bottom");
 } else collided_bottom =false;
-*/
-if (place_meeting(x-sprite_xoffset-3, y,obj_wall)) {
+
+/*if (place_meeting(x-sprite_xoffset-3, y,obj_wall)) {
 	collided_left = true; 
 } else collided_left =false;
 if (place_meeting(x+sprite_xoffset+3, y,obj_wall)) {
@@ -37,12 +41,12 @@ if (place_meeting(x, y-sprite_yoffset-3,obj_wall)) {
 if (place_meeting(x, y+sprite_yoffset+3,obj_wall)) {
 	collided_bottom = true; 
 } else collided_bottom =false;
-
+*/
 //show_debug_message("collided_bottom = " + string(collided_bottom)); 
 
 //var _collided = tilemap_get_at_pixel(tilemapID, x, y) != empty_tile;
-var inst_id = instance_position(x, y+sprite_yoffset+9, obj_wall);
-
+//var inst_id = instance_position(x, y+sprite_yoffset+9, obj_wall);
+var tile_id = tilemap_get_at_pixel(tilemapID,x, y+sprite_yoffset+9);
 if (dig_rdy) {
 	/*if (_collided && keyboard_check(vk_down)) {
 		dig_rdy = false;
@@ -61,8 +65,10 @@ if (dig_rdy) {
 		alarm[0] = dig_timer;
 		tilemap_set(tilemapID, 166, floor(x/16) + 1, floor(y/16));
 	}*/
-	if(inst_id != noone and keyboard_check(ord("F"))){
-		instance_destroy(inst_id);
+	//if(inst_id != noone and keyboard_check(ord("F"))){
+	if(tile_id != empty_tile and keyboard_check(ord("F"))){
+		//instance_destroy(inst_id);
+		tilemap_set_at_pixel(tilemapID, 0, x, y+sprite_yoffset+9);
 		var rw = (y+sprite_yoffset+9) div 32;
 		var cl = x div 32;
 		obj_map.all_maps[rw div 98].final[cl][rw mod 98] = 1;
@@ -100,3 +106,4 @@ if (mouse_check_button(mb_left)) && (cooldown < 1)
     cooldown = 30;
 }
 prevspd = vspd;
+

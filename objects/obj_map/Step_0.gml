@@ -77,6 +77,7 @@ else{
 
 #region generating new map
 if(obj_player.y>48*32+current_level*98*32) and all_maps[current_level+1] == noone {
+//if(obj_player.y>48*32+current_level*98*32) and all_maps[current_level+1] == 0 {
 	loadCnt = 0; //start to generate next map
 	line = 0
 }
