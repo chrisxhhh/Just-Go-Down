@@ -77,16 +77,27 @@ else{
 
 #region generating new map
 if(obj_player.y>48*32+current_level*98*32) and all_maps[current_level+1] == noone {
+//if(obj_player.y>48*32+current_level*98*32) and all_maps[current_level+1] == 0 {
 	loadCnt = 0; //start to generate next map
 	line = 0
 }
 show_debug_message(string(loadCnt))
+
+
 if loadCnt == 0 and line==0{
 	
 	//creating the initial 2d arrays for next map
 	all_maps[current_level+1] = new cellular_automata(128, 128, 0.50, all_maps[current_level])	
 	max_level++;
-		
+	
+	//generating check point
+	var _x = (all_maps[current_level + 1].special_x - 15) * 32;
+	var _y = (all_maps[current_level + 1].special_y - 15) * 32 + (current_level + 1) * 32 * 98;
+	next_checkpoint = instance_create_depth(_x, _y, 0, obj_checkpoint);
+	if (instance_exists(obj_arrow)) instance_destroy(obj_arrow);
+	instance_create_depth(obj_player.x, obj_player.y , -9999, obj_arrow);
+	
+	
 }else if loadCnt < num_iterations{
 	//in each frame, iterate once, update 16 lines to new_map
 	show_debug_message("max_level:")
@@ -104,24 +115,31 @@ if loadCnt == 0 and line==0{
 	
 }
 
-line += 16
+line += 16;
 
-
-if line > 127{
+if line > 127 {
 	loadCnt += 1
 	line = 0
 }
-loadCnt = clamp(loadCnt,0,num_iterations+1) //restrict loadCnt btw 0 and iteration+1
+loadCnt = clamp(loadCnt, 0, num_iterations + 1) //restrict loadCnt btw 0 and iteration+1
+
+
 if map_loaded {
 	//spawn_wall(all_maps[max_level]);
 	map_loaded = false;
 }
+
+
+
+
 if(keyboard_check(ord("W")) || keyboard_check(vk_space)){
 	dynamic_spawn_up();
 }
 else{
 	dynamic_spawn_down();
 }
+
+
 /*if(obj_player.vspd<0){
 	dynamic_spawn_up();
 }
@@ -159,3 +177,15 @@ else if obj_player.y <= 0 {
 	obj_player.y = 98*32;
 }*/
 #endregion
+
+
+if (next_checkpoint != noone) {
+	if (instance_exists(obj_arrow)) {
+		if (point_distance(obj_player.x, obj_player.y, next_checkpoint.x, next_checkpoint.y) <= 256) {
+			instance_destroy(obj_arrow);
+		} else {
+			var _dp_dir = point_direction(obj_player.x, obj_player.y, next_checkpoint.x, next_checkpoint.y);
+			obj_arrow.image_angle = _dp_dir;
+		}
+	}
+}

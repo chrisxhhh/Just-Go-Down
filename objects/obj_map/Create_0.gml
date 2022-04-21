@@ -114,9 +114,15 @@ dynamic_spawn_down = function(){
 	for(var i=0;i<98;i++){
 		if(r-load_dist>=0){
 			if(create_map[i][r-load_dist]==1){
-				instance_destroy(id_map[i][r-load_dist]);
+				//instance_destroy(id_map[i][r-load_dist]);
+				//var iid = instance_nearest(i*32,(r-load_dist)*32,obj_wall);
+				//instance_destroy(iid);
+				destroy_wall(i*32,(r-load_dist)*32);
 				create_map[i][r-load_dist] = 0;
 			}
+			
+			//var iid = instance_nearest(i*32,(r-load_dist)*32,obj_wall);
+			
 		}
 		/*if(r-load_dist-1>=0){
 			if(create_map[i][r-load_dist-1]==1){
@@ -138,8 +144,11 @@ dynamic_spawn_down = function(){
 		}*/
 		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 0 and create_map[i][r+load_dist] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
-			id_map[i][(r+load_dist)] = iid;
+			//var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
+			//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
+			create_wall(i * _spacing,(r+load_dist) * _spacing);
+			//show_debug_message(string(iid));
+			//id_map[i][(r+load_dist)] = iid;
 			create_map[i][r+load_dist] = 1;
 		}
 		/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 0 and create_map[i][r+load_dist+1] == 0){
@@ -158,8 +167,10 @@ dynamic_spawn_down = function(){
 		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 2 and create_map[i][r+load_dist] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_monster1);
+			//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_monster1);
+			//create_wall()
 			id_map[i][(r+load_dist)] = iid;
-			create_map[i][r+load_dist] = 1;
+			create_map[i][r+load_dist] = 2;
 		}
 		/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 2 and create_map[i][r+load_dist+1] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
@@ -183,7 +194,10 @@ dynamic_spawn_up = function(){
 		}*/
 		if(r+load_dist<98*32){
 			if(create_map[i][r+load_dist]==1){
-				instance_destroy(id_map[i][r+load_dist]);
+				//instance_destroy(id_map[i][r+load_dist]);
+				//var iid = instance_nearest(i*32,(r+load_dist)*32,obj_wall);
+				//instance_destroy(iid);
+				destroy_wall(i*32,(r+load_dist)*32);
 				create_map[i][r+load_dist] = 0;
 			}
 		}
@@ -195,8 +209,10 @@ dynamic_spawn_up = function(){
 		}*/
 		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 0 and create_map[i][r-load_dist] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
-			id_map[i][(r-load_dist)] = iid;
+			//var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
+			//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
+			create_wall(i * _spacing,(r-load_dist) * _spacing);
+			//id_map[i][(r-load_dist)] = iid;
 			create_map[i][r-load_dist] = 1;
 		}
 		/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 0 and create_map[i][r-load_dist-1] == 0){
@@ -215,8 +231,9 @@ dynamic_spawn_up = function(){
 		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 2 and create_map[i][r-load_dist] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
+			//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
 			id_map[i][(r-load_dist)] = iid;
-			create_map[i][r-load_dist] = 1;
+			create_map[i][r-load_dist] = 2;
 		}
 		/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 2 and create_map[i][r-load_dist-1] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
@@ -233,25 +250,81 @@ dynamic_spawn_up = function(){
 	}
 }
 
+respawn = function(_ty){
+	var _spacing = sprite_get_width(spr_square_wall);
+	var r = obj_player.y div 32;
+	var tr = _ty div 32;
+	for(var rw=r-load_dist; rw<=r+load_dist; rw++){
+		for(var cl=0;cl<98;cl++){
+			if(create_map[cl][rw]==1){
+				//instance_destroy(id_map[cl][rw]);
+				//var iid = instance_nearest(i*32,(r+load_dist)*32,obj_wall);
+				//instance_destroy(iid);
+				destroy_wall(cl*32,(rw)*32);
+				create_map[cl][rw] = 0;
+			}
+		}
+	}
+	for(var rw=tr-load_dist; rw<=tr+load_dist; rw++){
+		for(var cl=0;cl<98;cl++){
+			/*if(create_map[cl][rw]==0){
+				//instance_destroy(id_map[i][r+load_dist]);
+				//var iid = instance_nearest(i*32,(r+load_dist)*32,obj_wall);
+				//instance_destroy(iid);
+				//create_wall(cl*32,(rw)*32);
+				var iid = instance_create_layer()
+				create_map[cl][rw] = 1;
+			}*/
+			if (rw>=0 and rw<98*32 and all_maps[(rw) div 98].final[cl][(rw) mod 98] == 0 and create_map[cl][rw] == 0){
+			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				//var iid = instance_create_layer(cl * _spacing,(rw) * _spacing, layer, obj_wall);
+				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
+				create_wall(cl * _spacing,(rw) * _spacing);
+				//id_map[cl][(rw)] = iid;
+				create_map[cl][rw] = 1;
+			}
+			if (rw>=0 and rw<98*32 and all_maps[(rw) div 98].final[cl][(rw) mod 98] == 2 and create_map[cl][rw] == 0){
+			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(cl * _spacing,(rw) * _spacing, layer, obj_monster1);
+				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
+				//create_wall(i * _spacing,(r-load_dist) * _spacing);
+				id_map[cl][(rw)] = iid;
+				create_map[cl][rw] = 2;
+			}
+		}
+	}
+}
+
 load_dist       = 15;
 ite_rdy			= true;
 num_iterations	= 25;
 current_level	= 0;
 all_maps		= array_create(32, noone);
+//all_maps		= array_create(32, 0);
 id_map			= array_create(98,0);
 create_map		= array_create(98,0);
+//test_map		= array_create(98,0);
 loadCnt			= num_iterations+1; //not generateing if larger than num_iteration
 line			= 0
+next_checkpoint = noone;
 map_loaded = false;
 max_level = 0;
+global.bCollideX = 0;
+global.bCollideY = 0;
 randomize();
 
 #region initialize first map
 for(var _r = 0;_r<98;_r++){
 	id_map[_r] = array_create(32*98,0);
 	create_map[_r] = array_create(32*98,0);
+	//test_map[_r] = array_create(32*98,0);
 }
 all_maps[0] = new cellular_automata(128, 128, 0.50, all_maps[0]);
+/*for(var _r = 1; _r<32; _r++){
+	all_maps[_r] = new cellular_automata(128, 128, 0.50, all_maps[_r-1]);
+	all_maps[_r].iterate(num_iterations);
+	all_maps[_r].get_final_map();
+}*/
 show_debug_message("start iteration: " + string(current_time))
 all_maps[0].iterate(num_iterations);
 show_debug_message("covert to binary map: " + string(current_time))

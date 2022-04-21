@@ -127,10 +127,6 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	static iterate_line = function(_num = 1,_line) {
 		repeat(_num){
 
-			
-			
-
-			
 			for (var line = _line; line < _line+16; ++line){
 				
 				for (var row = 0; row < height; ++row) {
