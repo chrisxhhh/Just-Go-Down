@@ -5,6 +5,8 @@ obj_manager.check_point_x = x;
 obj_manager.check_point_y = y;
 obj_manager.next_checkpoint = noone;
 
+obj_attr.player_hp = obj_attr.player_hp_max;
+
 //if (current_level < 3) {
 //	obj_manager.timer += 20;
 //} else {

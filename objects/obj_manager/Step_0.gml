@@ -26,7 +26,7 @@
 //	game_over = true;
 //}
 
-var _i = irandom(30);
+var _i = irandom(75);
 if (_i == 0) {
 	var _x = random_range(-400, 400);
 	var _y = random_range(-400, 400);

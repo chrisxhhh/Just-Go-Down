@@ -3,7 +3,7 @@
 
 direction = point_direction(x, y, mouse_x, mouse_y);
 direction = direction + random_range(-4, 4);
-speed = 3;
+speed = 8;
 image_angle = direction;
 TlayerID = layer_get_id("Tiles_Ground"); 
 tilemapID = layer_tilemap_get_id(TlayerID); 

@@ -66,7 +66,7 @@ if (dig_rdy) {
 		tilemap_set(tilemapID, 166, floor(x/16) + 1, floor(y/16));
 	}*/
 	//if(inst_id != noone and keyboard_check(ord("F"))){
-	if(tile_id != empty_tile and keyboard_check(ord("F"))){
+	if(tile_id != empty_tile and mouse_check_button(mb_left) and weapon==1){
 		//instance_destroy(inst_id);
 		dig_rdy = false;
 		alarm[0] = dig_timer;
@@ -102,10 +102,23 @@ if(prevspd==vspd){
 if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
 
 cooldown = cooldown - 1;
-if (mouse_check_button(mb_left)) && (cooldown < 1)
+if (mouse_check_button(mb_left) && (cooldown < 1) && weapon==0 )
 {
     instance_create_layer(x, y, "bullet", obj_bullet);
     cooldown = 30;
 }
 prevspd = vspd;
+
+if(keyboard_check_pressed(ord("F"))){
+	weapon = (weapon+1) mod 2;
+	if(weapon==1){
+	instance_destroy(obj_gun);
+	instance_create_layer(x,y,"weapon",obj_shovel);
+	}
+	else{
+		instance_destroy(obj_shovel);
+		instance_create_layer(x,y,"weapon",obj_gun);
+	}
+}
+
 

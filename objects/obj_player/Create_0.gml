@@ -27,3 +27,4 @@ cooldown = 0;
 
 
 coins = 0;
+weapon = 0;
