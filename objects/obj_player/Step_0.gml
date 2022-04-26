@@ -102,22 +102,40 @@ if(prevspd==vspd){
 if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
 
 cooldown = cooldown - 1;
-if (mouse_check_button(mb_left) && (cooldown < 1) && weapon==0 )
+if (mouse_check_button(mb_left) && (cooldown < 1) && weapon==2 )
 {
     instance_create_layer(x, y, "bullet", obj_bullet);
     cooldown = 30;
 }
+
+
+if (weapon==3)
+{
+  if (mouse_check_button(mb_left)){
+	  if !( instance_exists(obj_laser)){
+			instance_create_layer(x, y, "laser", obj_laser);
+	  }
+  }
+  if !(mouse_check_button(mb_left)){
+	  instance_destroy(obj_laser);
+  }
+  
+}
 prevspd = vspd;
 
 if(keyboard_check_pressed(ord("F"))){
-	weapon = (weapon+1) mod 2;
+	weapon = (weapon+1) mod 4;
 	if(weapon==1){
 	instance_destroy(obj_gun);
 	instance_create_layer(x,y,"weapon",obj_shovel);
 	}
-	else{
+	else if (weapon == 2 or weapon == 3){
 		instance_destroy(obj_shovel);
 		instance_create_layer(x,y,"weapon",obj_gun);
+	}
+	else{
+		instance_destroy(obj_shovel);
+		instance_destroy(obj_gun);
 	}
 }
 
