@@ -78,8 +78,9 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	//covert to binary map
 	//1 is empty, 0 is solid
 	static get_final_map = function(_ground = false) {
-		for (var col = 0; col < 98; col++) {
-			for (var row = 0; row < 98; row++) {
+		for (var row = 0; row < 98; row++) {
+			var empty_land_count = 0
+			for (var col = 0; col < 98; col++) {
 				if (_ground) {
 					
 					if (row <= 78 and prev==noone) {
@@ -106,12 +107,21 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 					if (map[col + 15][row + 15] < 93 && map[col + 15][row + 15] > 87) {
 						// val between 87 and 93, 20% torch, 80% empty
 						final[col][row] = random(1) <= 0.2 ? 2 : 1;
+						empty_land_count = 0
 					} else if (map[col + 15][row + 15] <= 115 && map[col + 15][row + 15] > 65) {
 						//empty
 						final[col][row] = 1;
+						empty_land_count = 0
 					} else {
 						//solid
 						final[col][row] = 0;
+						if row!= 0 and final[col][row-1] == 1{
+							empty_land_count += 1
+							if empty_land_count == 4{
+								final[col][row-1] = 3
+								empty_land_count = 0
+							}
+						}
 					}
 				
 				}
