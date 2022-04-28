@@ -17,4 +17,7 @@ for (i=0; i< max_length; i++){
 	if(tile_id!= empty_tile){
 		break;
 	}
+	if (collision_point(xEnd, yEnd, obj_monster1, 1, 1)){
+		break;
+	}
 }
