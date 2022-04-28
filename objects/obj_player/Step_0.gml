@@ -1,4 +1,4 @@
-
+mspd = base_spd * obj_attr.player_move_mul;
 hspd = ( keyboard_check(ord("D")) - keyboard_check(ord("A")) ) * mspd;
 vspd = ( -(keyboard_check(ord("W")) || keyboard_check(vk_space)) ) * mspd;
 //show_debug_message(hspd);
@@ -101,11 +101,12 @@ if(prevspd==vspd){
 
 if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
 
-cooldown = cooldown - 1;
-if (mouse_check_button(mb_left) && (cooldown < 1) && weapon==2 )
+
+if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy)
 {
+	blt_rdy = false;
     instance_create_layer(x, y, "bullet", obj_bullet);
-    cooldown = 30;
+    alarm[1] = blt_timer;
 }
 
 
@@ -139,4 +140,7 @@ if(keyboard_check_pressed(ord("F"))){
 	}
 }
 
+//attack speed mult
+blt_timer = blt_init - obj_attr.player_atk_spd;
+dig_timer = dig_init - 2 * obj_attr.player_atk_spd;
 

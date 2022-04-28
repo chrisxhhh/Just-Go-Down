@@ -3,6 +3,8 @@
 // Inherit the parent event
 event_inherited();
 
+hp = 15;
+
 xdist_to_player = x - obj_player.x
 ydist_to_player = y - obj_player.y
 

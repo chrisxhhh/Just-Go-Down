@@ -7,5 +7,7 @@ if (point_distance(x, y, obj_player.x, obj_player.y) < 48) {
 	if (obj_attr.player_exp >= obj_attr.level_req[obj_attr.player_level]) {
 		obj_attr.player_level++;
 		obj_attr.player_hp = obj_attr.player_hp_max;
+		obj_attr.levelup = true;
+		obj_attr.level_points += 2;
 	}
 }

@@ -1,5 +1,5 @@
-
-mspd = 3; 
+base_spd = 3;
+mspd = base_spd; 
 hspd = 0; 
 vspd = 0;
 prevspd = 0;
@@ -21,9 +21,12 @@ collided_right = false;
 empty_tile = 0;
 
 dig_rdy = true;
-dig_timer = 1 * room_speed;
+dig_init = 1 * room_speed;
+dig_timer = dig_init;
 
-cooldown = 0;
+blt_rdy = true;
+blt_init = 0.5 * room_speed;
+blt_timer = blt_init;
 
 
 coins = 0;

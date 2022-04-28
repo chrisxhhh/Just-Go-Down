@@ -331,7 +331,7 @@ respawn = function(_ty){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 					var iid = instance_create_layer(cl * _spacing,(rw) * _spacing+_spacing, "enemy_layer", obj_wolf);
 				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
-				create_wall(i * _spacing,(r-load_dist) * _spacing);
+				//create_wall(i * _spacing,(r-load_dist) * _spacing);
 					id_map[cl][(rw)] = iid;
 					create_map[cl][rw] = 3;
 				}

@@ -1,3 +1,7 @@
+if (hp <= 0) {
+	instance_destroy(id);	
+}
+
 
 y_spd = 0
 y_spd += grav_amt;  

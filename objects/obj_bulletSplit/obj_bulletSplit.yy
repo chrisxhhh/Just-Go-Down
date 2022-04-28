@@ -29,8 +29,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "Weapon",
+    "path": "folders/Objects/Weapon.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_bulletSplit",
