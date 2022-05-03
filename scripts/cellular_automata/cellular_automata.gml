@@ -112,7 +112,10 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 						//empty
 						final[col][row] = 1;
 						empty_land_count = 0
-					} else {
+					} else if (map[col + 15][row + 15] >= 140 && map[col + 15][row + 15] < 20) {
+						final[col][row] = -1;
+					}
+					else {
 						//solid
 						final[col][row] = 0;
 						if row!= 0 and final[col][row-1] == 1{

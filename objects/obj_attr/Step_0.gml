@@ -14,7 +14,7 @@ if (keyboard_check_pressed(vk_escape)) {
 		instance_deactivate_all(true);
 		instance_activate_object(obj_black_board);
 		instance_activate_object(obj_cursor);
-		//instance_activate_object(obj_map);
+		instance_activate_object(obj_map);
 		global.pause = true;
 	}
 		
