@@ -80,6 +80,7 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 	static get_final_map = function(_ground = false) {
 		for (var row = 0; row < 98; row++) {
 			var empty_land_count = 0
+			var empty_land_reverse_count = 0
 			for (var col = 0; col < 98; col++) {
 				if (_ground) {
 					
@@ -108,16 +109,25 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 						// val between 87 and 93, 20% torch, 80% empty
 						final[col][row] = random(1) <= 0.2 ? 2 : 1;
 						empty_land_count = 0
+						empty_land_reverse_count = 0
 					} else if (map[col + 15][row + 15] <= 115 && map[col + 15][row + 15] > 65) {
 						//empty
 						final[col][row] = 1;
 						empty_land_count = 0
+						if row!= 0 and final[col][row-1] == 0{
+							empty_land_reverse_count += 1
+							if empty_land_reverse_count == 4{
+								final[col][row] = 4 //obj_centipede
+								empty_land_reverse_count = 0
+							}
+						}
 					} else if (map[col + 15][row + 15] >= 145 || map[col + 15][row + 15] < 10) {
 						final[col][row] = -1;
 					}
 					else {
 						//solid
 						final[col][row] = 0;
+						empty_land_reverse_count = 0
 						if row!= 0 and final[col][row-1] == 1{
 							empty_land_count += 1
 							if empty_land_count == 4{

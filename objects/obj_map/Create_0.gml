@@ -188,6 +188,15 @@ dynamic_spawn_down = function(){
 				instance_activate_object(id_map[i][(r+load_dist)])	
 			}
 		}
+		if ((r+load_dist)<98*32 and  all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 4){
+			if (create_map[i][r+load_dist] == 0){
+				var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing+_spacing, "enemy_layer",obj_centipede)
+				id_map[i][(r+load_dist)] = iid;
+				create_map[i][r+load_dist] = 4;
+			}
+			
+			
+		}
 		/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 2 and create_map[i][r+load_dist+1] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			var iid = instance_create_layer(i * _spacing,(r+load_dist+1) * _spacing, layer, obj_monster1);
@@ -267,6 +276,15 @@ dynamic_spawn_up = function(){
 				instance_activate_object(id_map[i][(r-load_dist)])	
 			}
 		}
+		if ((r+load_dist)>=0 and  all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 4){
+			if (create_map[i][r-load_dist] == 0){
+				var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, "enemy_layer", obj_centipede);
+				id_map[i][(r-load_dist)] = iid;
+				create_map[i][r-load_dist] = 4;
+			}
+			
+			
+		}
 		/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 2 and create_map[i][r-load_dist-1] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_monster1);
@@ -339,6 +357,14 @@ respawn = function(_ty){
 					instance_activate_object(id_map[cl][rw])	
 				}
 			}
+			if rw>=0 and rw<98*32 and all_maps[(rw) div 98].final[cl][(rw) mod 98] == 4  {
+				if ( create_map[cl][rw] == 0){
+					var iid = instance_create_layer(cl * _spacing,(rw) * _spacing, "enemy_layer", obj_centipede);
+					id_map[cl][(rw)] = iid;
+					create_map[cl][rw] = 3;
+				}
+			}
+	
 		}
 	}
 }
