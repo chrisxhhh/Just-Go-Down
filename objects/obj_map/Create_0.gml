@@ -145,7 +145,7 @@ dynamic_spawn_down = function(){
 			id_map[i][(r+load_dist-1)] = iid;
 			create_map[i][r+load_dist-1] = 1;
 		}*/
-		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 0 and create_map[i][r+load_dist] == 0){
+		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] <= 0 and create_map[i][r+load_dist] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			//var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
 			//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
@@ -226,7 +226,7 @@ dynamic_spawn_up = function(){
 				create_map[i][r+load_dist+1] = 0;
 			}
 		}*/
-		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 0 and create_map[i][r-load_dist] == 0){
+		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] <= 0 and create_map[i][r-load_dist] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 			//var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
 			//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
@@ -310,7 +310,7 @@ respawn = function(_ty){
 				var iid = instance_create_layer()
 				create_map[cl][rw] = 1;
 			}*/
-			if (rw>=0 and rw<98*32 and all_maps[(rw) div 98].final[cl][(rw) mod 98] == 0 and create_map[cl][rw] == 0){
+			if (rw>=0 and rw<98*32 and all_maps[(rw) div 98].final[cl][(rw) mod 98] <= 0 and create_map[cl][rw] == 0){
 			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
 				//var iid = instance_create_layer(cl * _spacing,(rw) * _spacing, layer, obj_wall);
 				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);

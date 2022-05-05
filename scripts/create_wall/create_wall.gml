@@ -140,12 +140,13 @@ function create_wall(_x, _y){
 		}
 		
 		if(up==0 && down==0 && left==0 && right==0){
-			if(obj_map.all_maps[mapNum].final[cl][rw]==-1){
+			/*if(obj_map.all_maps[mapNum].final[cl][rw] == -1){
 				obj_map.id_map[cl][_y div 32] = 286;
-			}
-			else{
-				obj_map.id_map[cl][_y div 32] = 338;
-			}
+				show_debug_message("set gold");
+			}*/
+			obj_map.id_map[cl][_y div 32] = 338;
+			
+			//obj_map.id_map[cl][_y div 32] = 338;
 		}
 		if(up==0 && down==0 && left==0 && right==1){
 			obj_map.id_map[cl][_y div 32] = 373;
@@ -191,6 +192,9 @@ function create_wall(_x, _y){
 		}
 		if(up==1 && down==1 && left==1 && right==1){
 			obj_map.id_map[cl][_y div 32] = 109;
+		}
+		if(obj_map.all_maps[mapNum].final[cl][rw] == -1){
+			obj_map.id_map[cl][_y div 32] = 286;
 		}
 		tilemap_set_at_pixel(map_id, obj_map.id_map[cl][_y div 32], _x, _y);
 		
