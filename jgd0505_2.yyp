@@ -11,6 +11,7 @@
     {"id":{"name":"spr_forest","path":"sprites/spr_forest/spr_forest.yy",},"order":29,},
     {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},"order":2,},
     {"id":{"name":"spr_black_board","path":"sprites/spr_black_board/spr_black_board.yy",},"order":28,},
+    {"id":{"name":"testRoom","path":"rooms/testRoom/testRoom.yy",},"order":2,},
     {"id":{"name":"destroy_wall","path":"scripts/destroy_wall/destroy_wall.yy",},"order":5,},
     {"id":{"name":"obj_fireball","path":"objects/obj_fireball/obj_fireball.yy",},"order":3,},
     {"id":{"name":"spr_exp","path":"sprites/spr_exp/spr_exp.yy",},"order":23,},
@@ -90,6 +91,7 @@
   },
   "RoomOrderNodes": [
     {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"testRoom","path":"rooms/testRoom/testRoom.yy",},},
     {"roomId":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
   ],
   "Folders": [
