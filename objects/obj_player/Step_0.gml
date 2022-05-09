@@ -99,7 +99,7 @@ if (!global.pause) {
 	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy)
 	{
 		blt_rdy = false;
-	    instance_create_layer(x, y, "bullet", obj_bullet);
+	    instance_create_layer(x, y, "weapon", obj_bullet);
 	    alarm[1] = blt_timer;
 	}
 
@@ -108,7 +108,7 @@ if (!global.pause) {
 	{
 	  if (mouse_check_button(mb_left)){
 		  if !( instance_exists(obj_laser)){
-				instance_create_layer(x, y, "laser", obj_laser);
+				instance_create_layer(x, y, "weapon", obj_laser);
 		  }
 	  }
 	  if !(mouse_check_button(mb_left)){

@@ -6,41 +6,41 @@ if(tile_id != empty_tile){
 	//global.bCollideX = x;
 	//global.bCollideY = y;
 	if(tilemap_get_at_pixel(tilemapID,x-10, y)==empty_tile){
-		with(instance_create_layer(x-12,y,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x-12,y,"instance",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x,other.y-1);
 			preDir = -1
 		}
-		with(instance_create_layer(x-12,y,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x-12,y,"instance",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x,other.y+1);
 			preDir = 1;
 		}
 	}
 	else if(tilemap_get_at_pixel(tilemapID,x+10, y)==empty_tile){
-		with(instance_create_layer(x+12,y,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x+12,y,"instance",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x,other.y-1);
 			preDir = 1;
 		}
-		with(instance_create_layer(x+12,y,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x+12,y,"instance",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x,other.y+1);
 			preDir = -1;
 		}
 	}
 	else if(tilemap_get_at_pixel(tilemapID,x,y-10)==empty_tile){
-		with(instance_create_layer(x,y-12,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x,y-12,"weapon",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x+1,other.y);
 			preDir = -1;
 		}
-		with(instance_create_layer(x,y-12,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x,y-12,"weapon",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x-1,other.y);
 			preDir = 1;
 		}
 	}
 	else if(tilemap_get_at_pixel(tilemapID,x,y+10)==empty_tile){
-		with(instance_create_layer(x,y+12,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x,y+12,"weapon",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x+1,other.y);
 			preDir = 1;
 		}
-		with(instance_create_layer(x,y+12,"bullet",obj_bulletSplit)){
+		with(instance_create_layer(x,y+12,"weapon",obj_bulletSplit)){
 			direction = point_direction(other.x,other.y,other.x-1,other.y);
 			preDir = -1;
 		}
