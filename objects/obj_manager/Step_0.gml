@@ -54,16 +54,8 @@ if (keyboard_check_pressed(ord("Q"))) {
 }
 
 
-//if (keyboard_check_pressed(ord("F"))) {
-//	if !view_enabled
-//	{
-//	    view_visible[0] = true;
-//	    view_enabled = true;
-//	}
-//	else {
-//		view_visible[0] = false;
-//	    view_enabled = false;
-		
-//	}
-//}
+if not underground and obj_player.y > 2090{
+	layer_destroy("Tiles_fake_layer")
+	underground = true
+}
 

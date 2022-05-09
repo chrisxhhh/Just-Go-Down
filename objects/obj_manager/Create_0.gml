@@ -14,3 +14,5 @@ check_point_y = 2250;
 
 base = 75;
 fire_ball_chance = base;
+
+underground = false //determine if the fake layer is destroyed
