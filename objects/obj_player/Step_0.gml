@@ -1,9 +1,25 @@
 mspd = base_spd * obj_attr.player_move_mul;
 hspd = ( keyboard_check(ord("D")) - keyboard_check(ord("A")) ) * mspd;
 vspd = ( -(keyboard_check(ord("W")) || keyboard_check(vk_space)) ) * mspd;
+
+
+
 //show_debug_message(hspd);
-if (hspd != 0 || vspd != 0) {
+if (hspd != 0) {
 	//audio_play_sound(sound_move, 0, false);
+	sprite_index = spr_player_walk;
+	image_xscale = hspd/abs(hspd);
+}
+else{
+	sprite_index = spr_player_idle;
+}
+
+if(previoushp < obj_attr.player_hp){
+	sprite_index = spr_player_hurt;
+	previoushp = obj_attr.player_hp;
+}
+else{
+	sprite_index = spr_player_idle;
 }
 
 // collision check: 

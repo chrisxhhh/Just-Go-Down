@@ -17,6 +17,7 @@ collided_right = false;
 
 
 
+
 //empty_tile = 166;
 empty_tile = 0;
 
@@ -27,6 +28,8 @@ dig_timer = dig_init;
 blt_rdy = true;
 blt_init = 0.5 * room_speed;
 blt_timer = blt_init;
+
+previoushp = 50;
 
 
 coins = 0;

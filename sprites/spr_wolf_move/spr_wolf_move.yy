@@ -97,8 +97,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "wolf",
+    "path": "folders/Sprites/wolf.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_wolf_move",
