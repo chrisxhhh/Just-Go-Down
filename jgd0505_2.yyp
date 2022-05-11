@@ -33,6 +33,7 @@
     {"id":{"name":"sound_bgm","path":"sounds/sound_bgm/sound_bgm.yy",},"order":1,},
     {"id":{"name":"spr_shovel","path":"sprites/spr_shovel/spr_shovel.yy",},"order":18,},
     {"id":{"name":"obj_monster1","path":"objects/obj_monster1/obj_monster1.yy",},"order":0,},
+    {"id":{"name":"barDisplay","path":"scripts/barDisplay/barDisplay.yy",},"order":10,},
     {"id":{"name":"spr_bulletSplit","path":"sprites/spr_bulletSplit/spr_bulletSplit.yy",},"order":16,},
     {"id":{"name":"array_replace_value","path":"scripts/array_replace_value/array_replace_value.yy",},"order":1,},
     {"id":{"name":"inv_RemoveItem","path":"scripts/inv_RemoveItem/inv_RemoveItem.yy",},"order":3,},
