@@ -33,6 +33,8 @@ previoushp = 50;
 is_hurting = false;
 hurting_timer = 10;
 
+is_attacking = false;
+attacking_timer = 30;
 
 
 coins = 0;

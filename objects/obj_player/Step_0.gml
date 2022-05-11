@@ -5,7 +5,7 @@ vspd = ( -(keyboard_check(ord("W")) || keyboard_check(vk_space)) ) * mspd;
 
 
 //show_debug_message(hspd);
-if(!is_hurting){
+if(!is_hurting && !is_attacking){
 	if (hspd != 0) {
 		//audio_play_sound(sound_move, 0, false);
 		sprite_index = spr_player_walk;
@@ -22,11 +22,17 @@ if(previoushp > obj_attr.player_hp){
 if(is_hurting){
 	hurting_timer--;
 }
+if (is_attacking){
+	attacking_timer--;
+}
 if(hurting_timer <=0){
-	sprite_index = spr_player_idle;
 	previoushp = obj_attr.player_hp;
-	hurting_timer = 0.5*room_speed;
+	hurting_timer = 10;
 	is_hurting = false;
+}
+if(attacking_timer<= 0){
+	attacking_timer = 30;
+	is_attacking = false;
 }
 
 
@@ -154,8 +160,11 @@ if (!global.pause) {
 	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy)
 	{
 		blt_rdy = false;
+		is_attacking = true;
+		sprite_index = spr_player_attack;
 	    instance_create_layer(x, y, "weapon", obj_bullet);
 	    alarm[1] = blt_timer;
+		
 	}
 
 
@@ -163,6 +172,8 @@ if (!global.pause) {
 	{
 	  if (mouse_check_button(mb_left)){
 		  if !( instance_exists(obj_laser)){
+				is_attacking = true;
+				sprite_index = spr_player_attack;
 				instance_create_layer(x, y, "weapon", obj_laser);
 		  }
 	  }
