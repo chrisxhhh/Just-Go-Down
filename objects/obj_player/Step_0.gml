@@ -164,6 +164,7 @@ if (!global.pause) {
 		sprite_index = spr_player_attack;
 	    instance_create_layer(x, y, "weapon", obj_bullet);
 	    alarm[1] = blt_timer;
+		audio_play_sound(sound_bullet_launch, 0, false);
 		
 	}
 
