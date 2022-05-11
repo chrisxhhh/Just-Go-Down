@@ -151,12 +151,12 @@ if (!global.pause) {
 		blt_rdy = false;
 		is_attacking = true;
 		sprite_index = spr_player_attack;
+		image_xscale = (mouse_x-x)/abs(mouse_x-x);
 	    instance_create_layer(x, y, "weapon", obj_bullet);
 	    alarm[1] = blt_timer;
 		audio_play_sound(sound_bullet_launch, 0, false);
 		
 	}
-
 
 	if (weapon==3)
 	{
@@ -164,6 +164,7 @@ if (!global.pause) {
 		  if !( instance_exists(obj_laser)){
 				is_attacking = true;
 				sprite_index = spr_player_attack;
+				image_xscale = (mouse_x-x)/abs(mouse_x-x);
 				instance_create_layer(x, y, "weapon", obj_laser);
 		  }
 	  }
