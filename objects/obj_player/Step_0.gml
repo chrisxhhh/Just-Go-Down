@@ -28,7 +28,7 @@ if (tile_ind < 0) {
 	show_debug_message("failed to check for collision here, index = "+string(tile_ind)); 	
 } 
 
-if (tilemap_get_at_pixel(tilemapID, x-sprite_xoffset-3, y) != empty_tile) {
+/*if (tilemap_get_at_pixel(tilemapID, x-sprite_xoffset-3, y) != empty_tile) {
 	collided_left = true; 
 	show_debug_message("left");
 } else collided_left =false;
@@ -44,13 +44,30 @@ if (tilemap_get_at_pixel(tilemapID, x, y+sprite_yoffset+3) != empty_tile) {
 	collided_bottom = true; 
 	show_debug_message("bottom");
 } else collided_bottom =false;
+*/
 
+if (tilemap_get_at_pixel(tilemapID, bbox_left-5, y) != empty_tile) {
+	collided_left = true; 
+	show_debug_message("left");
+} else collided_left =false;
+if (tilemap_get_at_pixel(tilemapID, bbox_right+5, y) != empty_tile ) {
+	collided_right = true; 
+	show_debug_message("right");
+} else collided_right =false;
+if (tilemap_get_at_pixel(tilemapID, x, bbox_top-5) != empty_tile) {
+	collided_top = true; 
+	show_debug_message("top");
+} else collided_top =false;
+if (tilemap_get_at_pixel(tilemapID, x, bbox_bottom+5) != empty_tile) {
+	collided_bottom = true; 
+	show_debug_message("bottom");
+} else collided_bottom =false;
 
 //dig
 var mouse_deg = point_direction(x,y,mouse_x,mouse_y)
 var tile_x = x
 var tile_y = y
-if (mouse_deg > 315 or mouse_deg <= 45 ){
+/*if (mouse_deg > 315 or mouse_deg <= 45 ){
 	//right_block
 	tile_x += sprite_xoffset+9
 }else if (mouse_deg < 135 and mouse_deg > 45){
@@ -62,6 +79,20 @@ if (mouse_deg > 315 or mouse_deg <= 45 ){
 }else{
 	//bot_block	
 	tile_y += sprite_yoffset+9
+}*/
+
+if (mouse_deg > 315 or mouse_deg <= 45 ){
+	//right_block
+	tile_x = bbox_right+5;
+}else if (mouse_deg < 135 and mouse_deg > 45){
+	//top_block
+	tile_y = bbox_top - 5;
+}else if (mouse_deg >= 135 and mouse_deg < 225){
+	//left_block	
+	tile_x = bbox_left - 5;
+}else{
+	//bot_block	
+	tile_y = bbox_bottom + 5;
 }
 
 var tile_id = tilemap_get_at_pixel(tilemapID,tile_x,tile_y);
