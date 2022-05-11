@@ -79,21 +79,9 @@ if (tilemap_get_at_pixel(tilemapID, x, bbox_bottom+5) != empty_tile) {
 
 //dig
 var mouse_deg = point_direction(x,y,mouse_x,mouse_y)
-var tile_x = x
-var tile_y = y
-/*if (mouse_deg > 315 or mouse_deg <= 45 ){
-	//right_block
-	tile_x += sprite_xoffset+9
-}else if (mouse_deg < 135 and mouse_deg > 45){
-	//top_block
-	tile_y -= sprite_yoffset+9
-}else if (mouse_deg >= 135 and mouse_deg < 225){
-	//left_block	
-	tile_x -= sprite_xoffset+9
-}else{
-	//bot_block	
-	tile_y += sprite_yoffset+9
-}*/
+tile_x = x
+tile_y = y
+
 
 if (mouse_deg > 315 or mouse_deg <= 45 ){
 	//right_block

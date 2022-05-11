@@ -5,8 +5,8 @@
 
 //current_level = 0;
 
-check_point_x = 775;
-check_point_y = 2250;
+check_point_x = 966;
+check_point_y = 1775;
 
 //game_over = false;
 
