@@ -15,7 +15,8 @@ for(var itm=0; itm<23; itm++){
 	if(itemDefIndex != ItemType.none){
 		draw_sprite(global.itemDefinitions[itemDefIndex,ItemProp.sprite], -1,700+8+40*j,30+8+40*i);
 		//draw_text(8+40*j+25,8+40*i+25,string(global.itemDefinitions[itemDefIndex, ItemProp.amount]));
-		draw_text_transformed(700+8+40*j+25,30+8+40*i+25,string(global.itemDefinitions[itemDefIndex, ItemProp.amount]),0.5,0.5,0);
+		//draw_text_transformed(700+8+40*j+25,30+8+40*i+25,string(global.itemDefinitions[itemDefIndex, ItemProp.amount]),0.5,0.5,0);
+		draw_text_transformed(700+8+40*j+25,30+8+40*i+25,string(itm+1),0.5,0.5,0);
 		//show_debug_message("i:");
 		//show_debug_message(i);
 		//show_debug_message("j:");
