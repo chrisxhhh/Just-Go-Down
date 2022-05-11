@@ -5,9 +5,10 @@ event_inherited();
 
 
 
-hp = 15;
+hp_max = 15;
 
-hp *= (1 + obj_map.current_level * 0.2);
+hp_max *= (1 + obj_map.current_level * 0.2);
+hp = hp_max
 
 xdist_to_player = x - obj_player.x
 ydist_to_player = y - obj_player.y

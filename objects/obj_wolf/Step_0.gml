@@ -10,9 +10,7 @@ xdist_to_player = x - obj_player.x
 ydist_to_player = y - obj_player.y
 
 
-if  my_health <= 0{
-	instance_destroy()	
-}
+
 
 if tilemap_get_at_pixel(tilemapID,x,y) != empty_tile{
 	y_spd -= grav_amt	

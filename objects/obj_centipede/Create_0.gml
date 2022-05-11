@@ -4,8 +4,8 @@ tilemapID = layer_tilemap_get_id(TlayerID);
 empty_tile = 0;
 
 dir = random(1) <= 0.5 ? 1 : -1;
-hp = 15 * (1 + obj_map.current_level * 0.2);
-
+hp_max = 15 * (1 + obj_map.current_level * 0.2);
+hp = hp_max
 //change depend on clockwise direction
 
 direction = dir==-1? 180 : 0;
