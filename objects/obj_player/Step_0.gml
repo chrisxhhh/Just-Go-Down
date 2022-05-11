@@ -18,6 +18,7 @@ if(!is_hurting && !is_attacking){
 if(previoushp > obj_attr.player_hp){
 	sprite_index = spr_player_hurt;
 	is_hurting = true;
+	ShakeScreen(.3,5);
 }
 if(is_hurting){
 	hurting_timer--;
