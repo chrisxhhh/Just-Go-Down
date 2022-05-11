@@ -184,9 +184,10 @@ if (!global.pause) {
   
 	}
 	prevspd = vspd;
-
-	if(keyboard_check_pressed(ord("F"))){
-		weapon = (weapon+1) mod 4;
+	weapon = global.inventory[23];
+	if(preweapon != weapon){
+		//weapon = (weapon+1) mod 4;
+		//weapon = global.inventory[23];
 		if(weapon==1){
 		instance_destroy(obj_gun);
 		instance_create_layer(x,y,"weapon",obj_shovel);
@@ -200,7 +201,7 @@ if (!global.pause) {
 			instance_destroy(obj_gun);
 		}
 	}
-
+	preweapon = weapon;
 }
 
 

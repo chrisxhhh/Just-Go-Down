@@ -39,3 +39,4 @@ attacking_timer = 30;
 
 coins = 0;
 weapon = 0;
+preweapon = 0;
