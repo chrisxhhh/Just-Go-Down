@@ -30,6 +30,9 @@ blt_init = 0.5 * room_speed;
 blt_timer = blt_init;
 
 previoushp = 50;
+is_hurting = false;
+hurting_timer = 10;
+
 
 
 coins = 0;

@@ -5,22 +5,30 @@ vspd = ( -(keyboard_check(ord("W")) || keyboard_check(vk_space)) ) * mspd;
 
 
 //show_debug_message(hspd);
-if (hspd != 0) {
-	//audio_play_sound(sound_move, 0, false);
-	sprite_index = spr_player_walk;
-	image_xscale = hspd/abs(hspd);
+if(!is_hurting){
+	if (hspd != 0) {
+		//audio_play_sound(sound_move, 0, false);
+		sprite_index = spr_player_walk;
+		image_xscale = hspd/abs(hspd);
+	}
+	else{
+		sprite_index = spr_player_idle;
+	}
 }
-else{
+if(previoushp > obj_attr.player_hp){
+	sprite_index = spr_player_hurt;
+	is_hurting = true;
+}
+if(is_hurting){
+	hurting_timer--;
+}
+if(hurting_timer <=0){
 	sprite_index = spr_player_idle;
+	previoushp = obj_attr.player_hp;
+	hurting_timer = 0.5*room_speed;
+	is_hurting = false;
 }
 
-if(previoushp < obj_attr.player_hp){
-	sprite_index = spr_player_hurt;
-	previoushp = obj_attr.player_hp;
-}
-else{
-	sprite_index = spr_player_idle;
-}
 
 // collision check: 
 var tile_ind = tilemap_get_at_pixel(tilemapID, x, y); 
