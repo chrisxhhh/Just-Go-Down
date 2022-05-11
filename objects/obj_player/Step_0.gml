@@ -104,6 +104,7 @@ if (dig_rdy) {
 		//instance_destroy(inst_id);
 		dig_rdy = false;
 		alarm[0] = dig_timer;
+		audio_play_sound(sound_dig, 0, false);
 		
 		tilemap_set_at_pixel(tilemapID, 0, tile_x,tile_y);
 		var rw = tile_y div 32;

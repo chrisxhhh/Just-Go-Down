@@ -41,6 +41,7 @@
     {"id":{"name":"spr_itemHolder","path":"sprites/spr_itemHolder/spr_itemHolder.yy",},"order":33,},
     {"id":{"name":"town_decor","path":"tilesets/town_decor/town_decor.yy",},"order":6,},
     {"id":{"name":"obj_wolf","path":"objects/obj_wolf/obj_wolf.yy",},"order":1,},
+    {"id":{"name":"sound_dig","path":"sounds/sound_dig/sound_dig.yy",},"order":2,},
     {"id":{"name":"cellular_automata","path":"scripts/cellular_automata/cellular_automata.yy",},"order":0,},
     {"id":{"name":"inv_DeclareItemDefinitions","path":"scripts/inv_DeclareItemDefinitions/inv_DeclareItemDefinitions.yy",},"order":2,},
     {"id":{"name":"spri_shovel","path":"sprites/spri_shovel/spri_shovel.yy",},"order":35,},
@@ -155,7 +156,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2022.3.0.624",
+    "IDEVersion": "2022.3.0.625",
   },
   "resourceVersion": "1.5",
   "name": "jgd0505_2",
