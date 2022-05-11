@@ -50,6 +50,7 @@
     {"id":{"name":"InventoryManager","path":"objects/InventoryManager/InventoryManager.yy",},"order":27,},
     {"id":{"name":"cave_tileset","path":"tilesets/cave_tileset/cave_tileset.yy",},"order":0,},
     {"id":{"name":"spr_bullet","path":"sprites/spr_bullet/spr_bullet.yy",},"order":8,},
+    {"id":{"name":"sound_hit","path":"sounds/sound_hit/sound_hit.yy",},"order":3,},
     {"id":{"name":"tileset_house","path":"tilesets/tileset_house/tileset_house.yy",},"order":5,},
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},"order":8,},
     {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":7,},
