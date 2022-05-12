@@ -3,7 +3,7 @@
 //draw_clear_alpha(c_white, 0.0);
 draw_sprite(spr_itemHolder,-1,650,50);
 
-for(var itm=0; itm<5; itm++){
+for (var itm = 0; itm < 6; itm++) {
 	itemDefIndex = global.inventory[itm];
 	//itemDefIndex = 1;
 	i = (itm+1) div 6;

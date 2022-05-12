@@ -2,7 +2,7 @@ globalvar pause;
 global.pause = false;
 
 levelup = false;
-level_points = 3;
+level_points = 50;
 
 center_x = 0;
 center_y = 0;
@@ -20,28 +20,34 @@ level_req		= [0, 10, 25, 40, 60, 80, 100, 125, 150, 175, 200, 250, 300, 350, 400
 
 
 len_stat = 8;
-stat_name = [ "STRENGTH", "DEXTERITY", "INTELLIGENCE", "VATALITY", "DEFENSE", "RESISTANCE", "SPIRIT", "BLACKSMITH(5)" ];
+stat_name = [ "STRENGTH", "DEXTERITY", "INTELLIGENCE", "VATALITY", "DEFENSE", "RESISTANCE", "SPIRIT", "BLACKSMITH" ];
 stat_indicator = [ 1, 1, 1, 1, 1, 1, 1, 1 ];
 
 len_attr = 10
-attr_name = [ "HP", "movement", "attack", "attack speed", "dig speed", "damage resistance", "dodge chance", "learning", "storm resistance", "efficiency" ]
+attr_name = [ "HP", "movement", "attack", "attack speed", "dig speed", "damage resistance", "view", "learning", "storm resistance", "efficiency" ]
 attr_indicator = [ player_hp_max, 1, 1, 1, 1, 1, 1, 1, 1, 1 ];
 
+stat_map = [
+	//"HP", "movement", "attack", "attack speed", "dig speed", "damage resistance", "view", "learning", "storm resistance", "efficiency"
+	[10, 2 , 10, 0 , 10, 0 , 0 , 0 , 0 , 0 ], // STR
+	[0 , 5 , 0 , 2 , 5 , 0 , 0 , 0 , 0 , 0 ], // DEX
+	[0 , 0 , 0 , 5 , 0 , 0 , 1 , 5 , 0 , 5 ], // INT
+	[30, 0 , 0 , 0 , 0 , 0 , 0 , 0 , 3 , 0 ], // VAL
+	[10, 0 , 0 , 0 , 0 , 10, 0 , 0 , 0 , 0 ], // DEF
+	[0 , 0 , 0 , 0 , 0 , 5 , 0 , 0 , 10, 0 ], // RES
+	[5 , 2 , 2 , 1 , 1 , 2 , 1 , 10, 5 , 2 ], // SPR
+	[0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 10]  // BLK
+]
 
-player_luck		= 1;
-player_move_mul = 1;
-player_atk_mul	= 1;
-player_atk_spd	= 1;
-camera_mul		= 1;
 
-level_indicator = [1, 1, 1, 1, 1, 1];
 
-num_gold	= 0;
-num_gem		= 0;
+//num_gold	= 0;
+//num_gem		= 0;
 
 mask_dur_max = 5;
 mask_dur	 = mask_dur_max;
 
 in_storm	= false;
-mask_cd		= 3 * room_speed;
+mask_base	= 3 * room_speed;
+mask_cd		= mask_base;
 

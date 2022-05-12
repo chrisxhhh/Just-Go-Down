@@ -24,7 +24,7 @@ for (i = 0; i < max_length; i++) {
 
 if (collision_circle(xEnd, yEnd, 16, obj_enemy, 1, 1) && dmg_rdy) {
 	
-	collision_circle(xEnd, yEnd, 16, obj_enemy, 1, 1).hp -= 3 * obj_attr.player_atk_mul;
+	collision_circle(xEnd, yEnd, 16, obj_enemy, 1, 1).hp -= 3 * obj_attr.attr_indicator[2];
 	dmg_rdy = false;
 	alarm[0] = dmg_timer;
 	

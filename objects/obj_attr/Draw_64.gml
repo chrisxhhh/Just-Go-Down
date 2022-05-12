@@ -87,6 +87,15 @@ if (instance_exists(obj_black_board)) {
 		
 		draw_set_color(c_white);
 		
+		
+		draw_text(_left + 50, 500, "REPAIR MASK");
+		//draw_sprite()
+		
+		
+		draw_text(_left + 50, 530, "REFILL HP");
+		
+		
+		
 		for (var i = 0; i < len_stat; i++) {
 			draw_text(_left, _top + i * _h_step, stat_indicator[i]);
 			draw_text(_left + 50, _top + i * _h_step, stat_name[i]);
@@ -98,6 +107,7 @@ if (instance_exists(obj_black_board)) {
 			draw_text(_right, _top + i * _h_step2, attr_name[i]);
 		}
 		
+		
 		var _point_to = 0;
 		
 		if (window_mouse_get_x() > _left - 10 && window_mouse_get_x() < _right - 25) {
@@ -106,12 +116,38 @@ if (instance_exists(obj_black_board)) {
 					_point_to = i
 					draw_set_alpha(0.4);
 					draw_rectangle(_left - 10, _top + i * _h_step, _right - 25, _top + (i + 0.75) * _h_step, false);
-					draw_set_alpha(1);				
+					draw_set_alpha(1);	
+					
+					draw_set_color(c_yellow);
+					for (var j = 0; j < len_attr; j++) {
+						if (stat_map[i][j] != 0) {
+							if (j == 0)
+								draw_text(_right + 250, _top + j * _h_step2, "+" + string(stat_map[i][j]));
+							else
+								draw_text(_right + 250, _top + j * _h_step2, "+" + string(stat_map[i][j] / 100));
+						}
+					}
+					draw_set_color(c_white);
+					
+					if (mouse_check_button_pressed(mb_left) && level_points > 0) {
+						level_points--;
+						stat_indicator[i]++;
+						for (var j = 0; j < len_attr; j++) {
+							if (stat_map[i][j] != 0) {
+								if (j == 0) {
+									attr_indicator[j] += stat_map[i][j];
+									player_hp_max += stat_map[i][j];
+									player_hp += stat_map[i][j];
+									player_hp = clamp(player_hp, 0, player_hp_max);
+								} else {
+									attr_indicator[j] += stat_map[i][j] / 100;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
-		draw_text(200, 200, _point_to);
-		
 	}
 }
 

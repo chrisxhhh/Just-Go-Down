@@ -1,4 +1,4 @@
-mspd = base_spd * obj_attr.player_move_mul;
+mspd = base_spd * obj_attr.attr_indicator[1];
 hspd = ( keyboard_check(ord("D")) - keyboard_check(ord("A")) ) * mspd;
 vspd = ( -(keyboard_check(ord("W")) || keyboard_check(vk_space)) ) * mspd;
 
@@ -111,13 +111,13 @@ if (dig_rdy) {
 		var rw = tile_y div 32;
 		var cl = tile_x div 32;
 		if (obj_map.all_maps[rw div 98].final[cl][rw mod 98] == -1) {
-			obj_attr.num_gold += 1;
-			for(var ii=0;ii<10;ii++){
+			//obj_attr.num_gold += 1;
+			for(var ii=0;ii<10 * obj_attr.attr_indicator[7];ii++){
 				inv_AddItem(ItemType.gold);
 			}
 		} else if (obj_map.all_maps[rw div 98].final[cl][rw mod 98] == -2) {
-			obj_attr.num_gem += 1;
-			for(var ii=0;ii<10;ii++){
+			//obj_attr.num_gem += 1;
+			for(var ii=0;ii<10 * obj_attr.attr_indicator[7];ii++){
 				inv_AddItem(ItemType.gem);
 			}
 		}
@@ -151,7 +151,7 @@ if (!global.pause) {
 		y += vspd;
 	}
 
-	if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
+	if (vspd == 0 and prevspd==vspd) y += obj_attr.attr_indicator[1] * grav * !collided_bottom;
 	
 	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy)
 	{
@@ -221,6 +221,6 @@ if (!global.pause) {
 
 
 //attack speed mult
-blt_timer = blt_init - obj_attr.player_atk_spd;
-dig_timer = dig_init - 2 * obj_attr.player_atk_spd;
+blt_timer = blt_init / obj_attr.attr_indicator[3];
+dig_timer = dig_init / obj_attr.attr_indicator[4];
 

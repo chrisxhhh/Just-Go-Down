@@ -8,8 +8,8 @@ if (keyboard_check_pressed(vk_escape)) {
 	if (global.pause) {
 		obj_black_board.leaving = true;
 		instance_activate_all();
-		obj_map.load_dist = 15 + level_indicator[4];
-		obj_map.load_dist = clamp(obj_map.load_dist, 15, 30);
+		//obj_map.load_dist = 15 + level_indicator[4];
+		//obj_map.load_dist = clamp(obj_map.load_dist, 15, 30);
 		//obj_storm_manager.speed = obj_storm_manager.spd_base;
 		global.pause = false;
 	} else {
@@ -26,48 +26,52 @@ if (keyboard_check_pressed(vk_escape)) {
 		
 }
 
-if (instance_exists(obj_black_board)) {
-	if (obj_black_board.centered) {
-		if (mouse_check_button_pressed(mb_left) && level_points > 0) {
-			if (window_mouse_get_x() > 215 && window_mouse_get_x() < 450) {
-				if (window_mouse_get_y() > 135 && window_mouse_get_y() < 165) {
-					level_indicator[0]++;
-					player_luck += 0.2;
-					level_points--;
-				}
-				else if (window_mouse_get_y() > 170 && window_mouse_get_y() < 200) {
-					level_indicator[1]++;
-					player_move_mul += 0.1;
-					level_points--;
-				}
-				else if (window_mouse_get_y() > 205 && window_mouse_get_y() < 235) {
-					level_indicator[2]++;
-					player_atk_mul += 0.1;
-					level_points--;
-				}
-				else if (window_mouse_get_y() > 240 && window_mouse_get_y() < 270) {
-					level_indicator[3]++;
-					player_atk_spd += 1;
-					level_points--;
-				}	
-				else if (window_mouse_get_y() > 275 && window_mouse_get_y() < 305) {
-					level_indicator[4]++;
-					camera_mul += 0.02;
-					level_points--;
-					camera_set_view_size(view_camera[0], view_wport[0] * camera_mul, view_hport[0] * camera_mul);
-					//camera_set_view_size(view_camera[0], camera_get_view_width(view_camera[0]) * camera_mul, camera_get_view_height(view_camera[0]) * camera_mul);
-				}
-				else if (window_mouse_get_y() > 310 && window_mouse_get_y() < 340) {
-					level_indicator[5]++;
-					player_hp_max += 30;
-					player_hp += 30;
-					player_hp = clamp(player_hp, 0, player_hp_max);
-					level_points--;
-				}
-			}
-		}
-	}
-}
+camera_set_view_size(view_camera[0], view_wport[0] * attr_indicator[6], view_hport[0] * attr_indicator[6]);
+mask_cd	= mask_base * attr_indicator[8];
+
+
+//if (instance_exists(obj_black_board)) {
+//	if (obj_black_board.centered) {
+//		if (mouse_check_button_pressed(mb_left) && level_points > 0) {
+//			if (window_mouse_get_x() > 215 && window_mouse_get_x() < 450) {
+//				if (window_mouse_get_y() > 135 && window_mouse_get_y() < 165) {
+//					level_indicator[0]++;
+//					player_luck += 0.2;
+//					level_points--;
+//				}
+//				else if (window_mouse_get_y() > 170 && window_mouse_get_y() < 200) {
+//					level_indicator[1]++;
+//					player_move_mul += 0.1;
+//					level_points--;
+//				}
+//				else if (window_mouse_get_y() > 205 && window_mouse_get_y() < 235) {
+//					level_indicator[2]++;
+//					player_atk_mul += 0.1;
+//					level_points--;
+//				}
+//				else if (window_mouse_get_y() > 240 && window_mouse_get_y() < 270) {
+//					level_indicator[3]++;
+//					player_atk_spd += 1;
+//					level_points--;
+//				}	
+//				else if (window_mouse_get_y() > 275 && window_mouse_get_y() < 305) {
+//					level_indicator[4]++;
+//					camera_mul += 0.02;
+//					level_points--;
+//					camera_set_view_size(view_camera[0], view_wport[0] * camera_mul, view_hport[0] * camera_mul);
+//					//camera_set_view_size(view_camera[0], camera_get_view_width(view_camera[0]) * camera_mul, camera_get_view_height(view_camera[0]) * camera_mul);
+//				}
+//				else if (window_mouse_get_y() > 310 && window_mouse_get_y() < 340) {
+//					level_indicator[5]++;
+//					player_hp_max += 30;
+//					player_hp += 30;
+//					player_hp = clamp(player_hp, 0, player_hp_max);
+//					level_points--;
+//				}
+//			}
+//		}
+//	}
+//}
 
 if (!pause && !in_storm) {
 	if (obj_player.y < obj_storm_manager.y) {

@@ -12,7 +12,7 @@ check_point_y = 1775;
 
 //audio_play_sound(sound_bgm, 0, true);
 
-base = 75;
+base = 175;
 fire_ball_chance = base;
 
 underground = false //determine if the fake layer is destroyed

@@ -29,9 +29,9 @@
 //spawning fireball
 
 fire_ball_chance = base - obj_map.current_level * 5;
-fire_ball_chance = clamp(fire_ball_chance, 40, base);
+fire_ball_chance = clamp(fire_ball_chance, 75, base);
 
-if ((!global.pause) && obj_map.current_level >= 3) {
+if ((!global.pause) && obj_map.current_level >= 4) {
 	var _i = irandom(fire_ball_chance);
 	if (_i == 0) {
 		var _x = random_range(-400, 400);

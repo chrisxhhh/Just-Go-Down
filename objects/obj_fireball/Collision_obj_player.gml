@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 instance_destroy(self);
-obj_attr.player_hp -= dmg;
+obj_attr.player_hp -= dmg / obj_attr.attr_indicator[5];
 
 //if (obj_attr.player_hp <= 0) {
 //	obj_map.respawn(obj_manager.check_point_y);

@@ -7,7 +7,7 @@ if sprite_index = spr_wolf_attack{
 		//obj_player.x_spd -= 3.5*-image_xscale
 		//HEALTH -= dmg
 		
-		var _dmg = 10 * (1 + obj_map.current_level * 0.05);
+		var _dmg = 10 * (1 + obj_map.current_level * 0.05) / obj_attr.attr_indicator[5];
 		
 		obj_attr.player_hp -= _dmg;
 

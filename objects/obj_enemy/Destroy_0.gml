@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 
-var _r = irandom(10 * obj_attr.player_luck);
+var _r = irandom(10 * obj_attr.attr_indicator[7]);
 for (var _i = 0; _i < _r; ++_i) {
 	var _dir = point_direction(obj_player.x, obj_player.y, x, y);
 	var _new_coin = instance_create_depth(x, y, -3000, obj_exp);
