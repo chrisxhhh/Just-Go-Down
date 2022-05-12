@@ -197,7 +197,7 @@ if (!global.pause) {
   
 	}
 	prevspd = vspd;
-	weapon = global.inventory[5];
+	weapon = global.inventory[6];
 	if(preweapon != weapon){
 		//weapon = (weapon+1) mod 4;
 		//weapon = global.inventory[23];

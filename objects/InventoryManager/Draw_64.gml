@@ -6,8 +6,8 @@ draw_sprite(spr_itemHolder,-1,650,50);
 for (var itm = 0; itm < 6; itm++) {
 	itemDefIndex = global.inventory[itm];
 	//itemDefIndex = 1;
-	i = (itm+1) div 6;
-	j = itm-6*i+1;
+	i = (itm+1) div 7;
+	j = itm-7*i+1;
 	//show_debug_message("i:");
 	//show_debug_message(i);
 	//show_debug_message("j:");
@@ -24,4 +24,4 @@ for (var itm = 0; itm < 6; itm++) {
 		//show_debug_message(j);
 	}
 }
-draw_sprite(global.itemDefinitions[global.inventory[5],ItemProp.sprite], -1,650+8,50+8);
+draw_sprite(global.itemDefinitions[global.inventory[6],ItemProp.sprite], -1,650+8,50+8);
