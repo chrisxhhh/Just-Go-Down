@@ -391,7 +391,7 @@ global.bCollideY = 0;
 randomize();
 
 #region initialize first map
-for(var _r = 0;_r<98;_r++){
+for(var _r = 0;_r<98;_r++) {
 	id_map[_r] = array_create(32*98,0);
 	create_map[_r] = array_create(32*98,0);
 	//test_map[_r] = array_create(32*98,0);

@@ -2,7 +2,7 @@
 // You can write your code in this editor
 
 if (instance_exists(obj_attr)) {
-	if (obj_attr.player_hp <= 0 || keyboard_check_pressed(ord("L"))) {
+	if (obj_attr.player_hp <= 0 || keyboard_check_pressed(ord("L")) || obj_map.current_level == 30) {
 		part_type_destroy(global.Particle1);
 		part_emitter_destroy(global.P_System, global.Emitter1);
 		part_system_destroy(global.P_System);
