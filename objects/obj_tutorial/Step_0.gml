@@ -10,7 +10,7 @@ if player_y > 2400 and not switchyet {
 
 
 
-switch (word){
+switch (word) {
 	case "movement":
 		if keyboard_check(ord("D")) or keyboard_check(ord("A")) or keyboard_check(ord("W")){
 			word = "notyet"	
@@ -19,7 +19,7 @@ switch (word){
 	case "go":
 		break;
 	case "switch":
-		if keyboard_check(ord("F")){
+		if keyboard_check(ord("1")) or keyboard_check(ord("2")) or keyboard_check(ord("3")){
 			word = "use"		
 		}
 		break;

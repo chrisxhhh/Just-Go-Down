@@ -42,6 +42,9 @@ if ((!global.pause) && obj_map.current_level >= 3) {
 }
 
 if (keyboard_check_pressed(ord("R"))) {
+	part_type_destroy(global.Particle1);
+	part_emitter_destroy(global.P_System, global.Emitter1);
+	part_system_destroy(global.P_System);
 	game_restart();
 }
 
@@ -54,7 +57,7 @@ if (keyboard_check_pressed(ord("Q"))) {
 }
 
 
-if not underground and obj_player.y > 2090{
+if not underground and obj_player.y > 2090 {
 	layer_destroy("Tiles_fake_layer")
 	underground = true
 }

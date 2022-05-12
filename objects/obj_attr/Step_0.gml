@@ -10,11 +10,13 @@ if (keyboard_check_pressed(vk_escape)) {
 		instance_activate_all();
 		obj_map.load_dist = 15 + level_indicator[4];
 		obj_map.load_dist = clamp(obj_map.load_dist, 15, 30);
+		//obj_storm_manager.speed = obj_storm_manager.spd_base;
 		global.pause = false;
 	} else {
-		instance_create_depth(0, 0, -9999, obj_black_board);
+		instance_create_depth(0, 0, -11000, obj_black_board);
 		instance_deactivate_object(obj_enemy);
 		instance_deactivate_object(obj_fireball);
+		//obj_storm_manager.speed = obj_storm_manager.spd_base * 0.2;
 		//instance_deactivate_all(true);
 		//instance_activate_object(obj_black_board);
 		//instance_activate_object(obj_cursor);
@@ -57,8 +59,8 @@ if (instance_exists(obj_black_board)) {
 				}
 				else if (window_mouse_get_y() > 310 && window_mouse_get_y() < 340) {
 					level_indicator[5]++;
-					player_hp_max += 10;
-					player_hp += 10;
+					player_hp_max += 30;
+					player_hp += 30;
 					player_hp = clamp(player_hp, 0, player_hp_max);
 					level_points--;
 				}
@@ -67,6 +69,29 @@ if (instance_exists(obj_black_board)) {
 	}
 }
 
+if (!pause && !in_storm) {
+	if (obj_player.y < obj_storm_manager.y) {
+		in_storm = true;
+		alarm[0] = mask_cd;
+	}
+} 
+
+if (obj_player.y > obj_storm_manager.y) {
+	in_storm = false;
+}
+
+
+if (obj_player.y < obj_storm_manager.y && !pause && mask_dur == 0) {
+	player_hp--;
+}
+
+if (obj_attr.player_hp <= 0) {
+	obj_map.respawn(obj_manager.check_point_y);
+	obj_player.x = obj_manager.check_point_x;
+	obj_player.y = obj_manager.check_point_y;
+	obj_map.current_level = obj_player.y div (98 * 32);
+	obj_attr.player_hp = obj_attr.player_hp_max;
+}
 
 
 //camera_set_view_size(view_camera[0], view_wport[0] * camera_mul, view_hport[0] * camera_mul);

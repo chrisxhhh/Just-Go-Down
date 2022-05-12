@@ -1,7 +1,7 @@
 
 movement = "press [W/A/D] to move"
 go = "STOREM COMING! JUST GO DOWN!"
-switch_weapon = "click [F] to switch tools"
+switch_weapon = "click 1, 2, 3 to switch tools"
 use = "use mouse to shoot or dig"
 
 
