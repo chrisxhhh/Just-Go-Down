@@ -89,13 +89,13 @@ if (obj_player.y < obj_storm_manager.y && !pause && mask_dur == 0) {
 	player_hp--;
 }
 
-if (obj_attr.player_hp <= 0) {
-	obj_map.respawn(obj_manager.check_point_y);
-	obj_player.x = obj_manager.check_point_x;
-	obj_player.y = obj_manager.check_point_y;
-	obj_map.current_level = obj_player.y div (98 * 32);
-	obj_attr.player_hp = obj_attr.player_hp_max;
-}
+//if (obj_attr.player_hp <= 0) {
+//	obj_map.respawn(obj_manager.check_point_y);
+//	obj_player.x = obj_manager.check_point_x;
+//	obj_player.y = obj_manager.check_point_y;
+//	obj_map.current_level = obj_player.y div (98 * 32);
+//	obj_attr.player_hp = obj_attr.player_hp_max;
+//}
 
 
 //camera_set_view_size(view_camera[0], view_wport[0] * camera_mul, view_hport[0] * camera_mul);

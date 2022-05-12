@@ -84,7 +84,7 @@ if(obj_player.y>48*32+current_level*98*32) and all_maps[current_level+1] == noon
 show_debug_message(string(loadCnt))
 
 
-if loadCnt == 0 and line==0{
+if loadCnt == 0 and line==0 {
 	
 	//creating the initial 2d arrays for next map
 	all_maps[current_level+1] = new cellular_automata(128, 128, 0.50, all_maps[current_level])	

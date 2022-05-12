@@ -16,3 +16,5 @@ base = 175;
 fire_ball_chance = base;
 
 underground = false //determine if the fake layer is destroyed
+
+

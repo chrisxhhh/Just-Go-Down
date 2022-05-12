@@ -16,3 +16,5 @@ global.Emitter1 = part_emitter_create(global.P_System);
 
 alarm[0] = room_speed * 0.5;
 
+
+

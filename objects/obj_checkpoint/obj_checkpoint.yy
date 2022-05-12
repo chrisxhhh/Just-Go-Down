@@ -1,8 +1,5 @@
 {
-  "spriteId": {
-    "name": "spr_checkpoint",
-    "path": "sprites/spr_checkpoint/spr_checkpoint.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
@@ -27,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Others",
-    "path": "folders/Objects/Others.yy",
+    "name": "powerup",
+    "path": "folders/Objects/powerup.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_checkpoint",

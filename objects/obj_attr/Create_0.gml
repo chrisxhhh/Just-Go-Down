@@ -2,7 +2,7 @@ globalvar pause;
 global.pause = false;
 
 levelup = false;
-level_points = 50;
+level_points = 3;
 
 center_x = 0;
 center_y = 0;
@@ -14,14 +14,14 @@ player_exp		= 0;
 
 
 level_req		= [0, 10, 25, 40, 60, 80, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500,
-				   600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2500, 3000, 3500, 5000];
+				   600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2500, 3000, 3500, 5000, 7500, 10000, 99999];
 
 //level up [max_hp+, move+, atk+, atk_spd+, luck+, camera+]
 
 
 len_stat = 8;
 stat_name = [ "STRENGTH", "DEXTERITY", "INTELLIGENCE", "VATALITY", "DEFENSE", "RESISTANCE", "SPIRIT", "BLACKSMITH" ];
-stat_indicator = [ 1, 1, 1, 1, 1, 1, 1, 1 ];
+stat_indicator = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
 
 len_attr = 10
 attr_name = [ "HP", "movement", "attack", "attack speed", "dig speed", "damage resistance", "view", "learning", "storm resistance", "efficiency" ]

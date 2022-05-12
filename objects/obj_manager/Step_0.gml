@@ -48,17 +48,25 @@ if (keyboard_check_pressed(ord("R"))) {
 	game_restart();
 }
 
-if (keyboard_check_pressed(ord("Q"))) {
-	obj_map.respawn(check_point_y);
-	obj_player.x = check_point_x;
-	obj_player.y = check_point_y;
-	obj_map.current_level = obj_player.y div (98 * 32);
+//if (keyboard_check_pressed(ord("Q"))) {
+//	obj_map.respawn(check_point_y);
+//	obj_player.x = check_point_x;
+//	obj_player.y = check_point_y;
+//	obj_map.current_level = obj_player.y div (98 * 32);
 	
-}
+//}
 
+//if (keyboard_check_pressed(ord("E"))) {
+//	with(obj_enemy) {
+//		if irandom(3) == 0 {
+//			instance_destroy(id);
+//		}
+//	}
+//}
 
 if not underground and obj_player.y > 2090 {
 	layer_destroy("Tiles_fake_layer")
 	underground = true
 }
+
 

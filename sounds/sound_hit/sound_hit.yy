@@ -1,7 +1,7 @@
 {
   "conversionMode": 0,
   "compression": 0,
-  "volume": 1.0,
+  "volume": 0.1,
   "preload": false,
   "bitRate": 128,
   "sampleRate": 44100,
@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sound_hit.wav",
-  "duration": 0.248163,
+  "duration": 0.11,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

@@ -14,3 +14,7 @@
 //}
 
 //draw_set_color(c_white);
+
+//draw_text(15, 15, string(floor(player_depth)));
+//draw_text(15, 40, string(p_level));
+

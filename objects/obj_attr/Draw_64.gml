@@ -61,8 +61,6 @@ for (var i = 0; i < mask_dur; i++) {
 
 draw_set_color(c_white);
 
-
-
 var _left = 225;
 var _top = 200;
 var _h_step = 35;
@@ -87,14 +85,81 @@ if (instance_exists(obj_black_board)) {
 		
 		draw_set_color(c_white);
 		
-		
-		draw_text(_left + 50, 500, "REPAIR MASK");
-		//draw_sprite()
-		
-		
-		draw_text(_left + 50, 530, "REFILL HP");
+		var _mk_gold = floor(50 / attr_indicator[9]);
+		var _mk_gem = floor(100 / attr_indicator[9]);
+		var _hp_gold = floor(75 / attr_indicator[9]);
+		var _hp_gem = floor(30 / attr_indicator[9]);
 		
 		
+		
+		draw_text(_left + 50, 500, "REPAIR MASK(1)");
+		draw_sprite(spri_gold, -1, _left + 300, 498);
+		draw_text(_left + 330, 500, "x" + string(_mk_gold));
+		draw_sprite(spri_gem, -1, _left + 400, 498);
+		draw_text(_left + 430, 500, "x" + string(_mk_gem));
+		
+		draw_text(_left + 50, 550, "REFILL HP(20%)");
+		draw_sprite(spri_gold, -1, _left + 300, 548);
+		draw_text(_left + 330, 550, "x" + string(_hp_gold));
+		draw_sprite(spri_gem, -1, _left + 400, 548);
+		draw_text(_left + 430, 550, "x" + string(_hp_gem));
+		
+		
+		draw_set_alpha(0.4);
+		if (window_mouse_get_x() > _left + 290 && window_mouse_get_x() < _left + 480) {
+			if (window_mouse_get_x() > _left + 290 && window_mouse_get_x() < _left + 380) {
+				if (window_mouse_get_y() > 500 && window_mouse_get_y() < 535) {
+					draw_rectangle(_left + 290, 500, _left + 380, 535, false);
+					if (mouse_check_button_pressed(mb_left)) {
+						// MASK - GOLDx50
+						if (mask_dur != mask_dur_max && global.itemDefinitions[ItemType.gold, ItemProp.amount] >= _mk_gold) {
+							mask_dur++;
+							for (var k = 0; k < _mk_gold; k++) {
+								inv_RemoveItem(ItemType.gold);
+							}
+						}
+					}
+				} else if (window_mouse_get_y() > 550 && window_mouse_get_y() < 585) {
+					draw_rectangle(_left + 290, 550, _left + 380, 585, false);
+					if (mouse_check_button_pressed(mb_left)) {
+						// HP - GOLDx75
+						if (player_hp != player_hp_max  && global.itemDefinitions[ItemType.gold, ItemProp.amount] >= _hp_gold) {
+							player_hp += player_hp_max * 0.2;
+							player_hp = clamp(player_hp, 0, player_hp_max);
+							for (var k = 0; k < _hp_gold; k++) {
+								inv_RemoveItem(ItemType.gold);
+							}
+						}
+					}
+				}
+			} else if (window_mouse_get_x() > _left + 390 && window_mouse_get_x() < _left + 480) {
+				if (window_mouse_get_y() > 500 && window_mouse_get_y() < 535) {
+					draw_rectangle(_left + 390, 500, _left + 480, 535, false);
+					if (mouse_check_button_pressed(mb_left)) {
+						// MASK - GEMx100
+						if (mask_dur != mask_dur_max && global.itemDefinitions[ItemType.gem, ItemProp.amount] >= _mk_gem) {
+							mask_dur++;
+							for (var k = 0; k < _mk_gem; k++) {
+								inv_RemoveItem(ItemType.gem);
+							}
+						}
+					}
+				} else if (window_mouse_get_y() > 550 && window_mouse_get_y() < 585) {
+					draw_rectangle(_left + 390, 550, _left + 480, 585, false);
+					if (mouse_check_button_pressed(mb_left)) {
+						// HP - GEMx30
+						if (player_hp != player_hp_max && global.itemDefinitions[ItemType.gem, ItemProp.amount] >= _hp_gem) {
+							player_hp += player_hp_max * 0.2;
+							player_hp = clamp(player_hp, 0, player_hp_max);
+							for (var k = 0; k < _hp_gem; k++) {
+								inv_RemoveItem(ItemType.gem);
+							}
+						}
+					} 
+				}
+			}
+		}
+		draw_set_alpha(1);
 		
 		for (var i = 0; i < len_stat; i++) {
 			draw_text(_left, _top + i * _h_step, stat_indicator[i]);
