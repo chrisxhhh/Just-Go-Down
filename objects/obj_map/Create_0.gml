@@ -111,98 +111,100 @@ dynamic_spawn_down = function(){
 	var _spacing = sprite_get_width(spr_square_wall);
 	
 	var r = obj_player.y div 32;
-	for(var i=0;i<98;i++){
-		if(r-load_dist>=0){
-			if(create_map[i][r-load_dist]==1){
-				//instance_destroy(id_map[i][r-load_dist]);
+	for(var offset = -1; offset<=1;offset++){
+		for(var i=0;i<98;i++){
+			if(r-load_dist+offset>=0){
+				if(create_map[i][r-load_dist+offset]==1){
+					//instance_destroy(id_map[i][r-load_dist]);
+					//var iid = instance_nearest(i*32,(r-load_dist)*32,obj_wall);
+					//instance_destroy(iid);
+					destroy_wall(i*32,(r-load_dist+offset)*32);
+					create_map[i][r-load_dist+offset] = 0;
+				}
+				else if (create_map[i][r-load_dist+offset]==3){
+					instance_deactivate_object(id_map[i][r-load_dist+offset])	
+				}
+			
 				//var iid = instance_nearest(i*32,(r-load_dist)*32,obj_wall);
-				//instance_destroy(iid);
-				destroy_wall(i*32,(r-load_dist)*32);
-				create_map[i][r-load_dist] = 0;
-			}
-			else if (create_map[i][r-load_dist]==3){
-				instance_deactivate_object(id_map[i][r-load_dist])	
-			}
 			
-			//var iid = instance_nearest(i*32,(r-load_dist)*32,obj_wall);
-			
-		}
-		/*if(r-load_dist-1>=0){
-			if(create_map[i][r-load_dist-1]==1){
-				instance_destroy(id_map[i][r-load_dist-1]);
-				create_map[i][r-load_dist-1] = 0;
 			}
-		}
-		if(r-load_dist+1>=0){
-			if(create_map[i][r-load_dist+1]==1){
-				instance_destroy(id_map[i][r-load_dist+1]);
-				create_map[i][r-load_dist+1] = 0;
+			/*if(r-load_dist-1>=0){
+				if(create_map[i][r-load_dist-1]==1){
+					instance_destroy(id_map[i][r-load_dist-1]);
+					create_map[i][r-load_dist-1] = 0;
+				}
 			}
-		}
-		if ((r+load_dist-1)<98*32 and all_maps[(r+load_dist-1) div 98].final[i][(r+load_dist-1) mod 98] == 0 and create_map[i][r+load_dist-1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r+load_dist-1) * _spacing, layer, obj_wall);
-			id_map[i][(r+load_dist-1)] = iid;
-			create_map[i][r+load_dist-1] = 1;
-		}*/
-		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] <= 0 and create_map[i][r+load_dist] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			//var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
-			//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
-			create_wall(i * _spacing,(r+load_dist) * _spacing);
-			//show_debug_message(string(iid));
-			//id_map[i][(r+load_dist)] = iid;
-			create_map[i][r+load_dist] = 1;
-		}
-		/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 0 and create_map[i][r+load_dist+1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r+load_dist+1) * _spacing, layer, obj_wall);
-			id_map[i][(r+load_dist+1)] = iid;
-			create_map[i][r+load_dist+1] = 1;
-		}
-		
-		if ((r+load_dist-1)<98*32 and all_maps[(r+load_dist-1) div 98].final[i][(r+load_dist-1) mod 98] == 2 and create_map[i][r+load_dist-1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r+load_dist-1) * _spacing, layer, obj_monster1);
-			id_map[i][(r+load_dist-1)] = iid;
-			create_map[i][r+load_dist-1] = 1;
-		}*/
-		if ((r+load_dist)<98*32 and all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 2 and create_map[i][r+load_dist] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, "enemy_layer", obj_monster1);
-			//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_monster1);
-			//create_wall()
-			id_map[i][(r+load_dist)] = iid;
-			create_map[i][r+load_dist] = 2;
-		}
-		if ((r+load_dist)<98*32 and  all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 3 ){
-			if (create_map[i][r+load_dist] == 0){
+			if(r-load_dist+1>=0){
+				if(create_map[i][r-load_dist+1]==1){
+					instance_destroy(id_map[i][r-load_dist+1]);
+					create_map[i][r-load_dist+1] = 0;
+				}
+			}
+			if ((r+load_dist-1)<98*32 and all_maps[(r+load_dist-1) div 98].final[i][(r+load_dist-1) mod 98] == 0 and create_map[i][r+load_dist-1] == 0){
 				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-				var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing+_spacing, "enemy_layer", obj_wolf);
-				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
-				id_map[i][(r+load_dist)] = iid;
-				create_map[i][r+load_dist] = 3;
+				var iid = instance_create_layer(i * _spacing,(r+load_dist-1) * _spacing, layer, obj_wall);
+				id_map[i][(r+load_dist-1)] = iid;
+				create_map[i][r+load_dist-1] = 1;
+			}*/
+			if ((r+load_dist+offset)<98*32 and all_maps[(r+load_dist+offset) div 98].final[i][(r+load_dist+offset) mod 98] <= 0 and create_map[i][r+load_dist+offset] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				//var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
+				//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_wall);
+				create_wall(i * _spacing,(r+load_dist+offset) * _spacing);
+				//show_debug_message(string(iid));
+				//id_map[i][(r+load_dist)] = iid;
+				create_map[i][r+load_dist+offset] = 1;
 			}
-			else if (create_map[i][r+load_dist] == 3){
-				show_debug_message("wolf activated down"+string(id_map[i][(r+load_dist)]))
-				instance_activate_object(id_map[i][(r+load_dist)])	
+			/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 0 and create_map[i][r+load_dist+1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r+load_dist+1) * _spacing, layer, obj_wall);
+				id_map[i][(r+load_dist+1)] = iid;
+				create_map[i][r+load_dist+1] = 1;
 			}
-		}
-		if ((r+load_dist)<98*32 and  all_maps[(r+load_dist) div 98].final[i][(r+load_dist) mod 98] == 4){
-			if (create_map[i][r+load_dist] == 0){
-				var iid = instance_create_layer(i * _spacing,(r+load_dist) * _spacing+_spacing, "enemy_layer",obj_centipede)
-				id_map[i][(r+load_dist)] = iid;
-				create_map[i][r+load_dist] = 4;
+		
+			if ((r+load_dist-1)<98*32 and all_maps[(r+load_dist-1) div 98].final[i][(r+load_dist-1) mod 98] == 2 and create_map[i][r+load_dist-1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r+load_dist-1) * _spacing, layer, obj_monster1);
+				id_map[i][(r+load_dist-1)] = iid;
+				create_map[i][r+load_dist-1] = 1;
+			}*/
+			if ((r+load_dist+offset)<98*32 and all_maps[(r+load_dist+offset) div 98].final[i][(r+load_dist+offset) mod 98] == 2 and create_map[i][r+load_dist+offset] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r+load_dist+offset) * _spacing, "enemy_layer", obj_monster1);
+				//instance_create_layer(i * _spacing,(r+load_dist) * _spacing, layer, obj_monster1);
+				//create_wall()
+				id_map[i][(r+load_dist+offset)] = iid;
+				create_map[i][r+load_dist+offset] = 2;
 			}
+			if ((r+load_dist+offset)<98*32 and  all_maps[(r+load_dist+offset) div 98].final[i][(r+load_dist+offset) mod 98] == 3 ){
+				if (create_map[i][r+load_dist+offset] == 0){
+					//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+					var iid = instance_create_layer(i * _spacing,(r+load_dist+offset) * _spacing+_spacing, "enemy_layer", obj_wolf);
+					//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
+					id_map[i][(r+load_dist+offset)] = iid;
+					create_map[i][r+load_dist+offset] = 3;
+				}
+				else if (create_map[i][r+load_dist+offset] == 3){
+					show_debug_message("wolf activated down"+string(id_map[i][(r+load_dist+offset)]))
+					instance_activate_object(id_map[i][(r+load_dist+offset)])	
+				}
+			}
+			if ((r+load_dist+offset)<98*32 and  all_maps[(r+load_dist+offset) div 98].final[i][(r+load_dist+offset) mod 98] == 4){
+				if (create_map[i][r+load_dist+offset] == 0){
+					var iid = instance_create_layer(i * _spacing,(r+load_dist+offset) * _spacing+_spacing, "enemy_layer",obj_centipede)
+					id_map[i][(r+load_dist+offset)] = iid;
+					create_map[i][r+load_dist+offset] = 4;
+				}
 			
 			
+			}
+			/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 2 and create_map[i][r+load_dist+1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r+load_dist+1) * _spacing, layer, obj_monster1);
+				id_map[i][(r+load_dist+1)] = iid;
+				create_map[i][r+load_dist+1] = 1;
+			}*/
 		}
-		/*if ((r+load_dist+1)<98*32 and all_maps[(r+load_dist+1) div 98].final[i][(r+load_dist+1) mod 98] == 2 and create_map[i][r+load_dist+1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r+load_dist+1) * _spacing, layer, obj_monster1);
-			id_map[i][(r+load_dist+1)] = iid;
-			create_map[i][r+load_dist+1] = 1;
-		}*/
 	}
 }
 
@@ -210,93 +212,95 @@ dynamic_spawn_up = function(){
 	var _spacing = sprite_get_width(spr_square_wall);
 	
 	var r = obj_player.y div 32;
-	for(var i=0;i<98;i++){
-		/*if(r+load_dist-1<98*32){
-			if(create_map[i][r+load_dist-1]==1){
-				instance_destroy(id_map[i][r+load_dist-1]);
-				create_map[i][r+load_dist-1] = 0;
+	for(var offset=-1;offset<=1;offset++){
+		for(var i=0;i<98;i++){
+			/*if(r+load_dist-1<98*32){
+				if(create_map[i][r+load_dist-1]==1){
+					instance_destroy(id_map[i][r+load_dist-1]);
+					create_map[i][r+load_dist-1] = 0;
+				}
+			}*/
+			if(r+load_dist+offset<98*32){
+				if(create_map[i][r+load_dist+offset]==1){
+					//instance_destroy(id_map[i][r+load_dist]);
+					//var iid = instance_nearest(i*32,(r+load_dist)*32,obj_wall);
+					//instance_destroy(iid);
+					destroy_wall(i*32,(r+load_dist+offset)*32);
+					create_map[i][r+load_dist+offset] = 0;
+				}
+				else if (create_map[i][r+load_dist+offset]==3){
+					instance_deactivate_object(id_map[i][r+load_dist+offset])	
+				}
 			}
-		}*/
-		if(r+load_dist<98*32){
-			if(create_map[i][r+load_dist]==1){
-				//instance_destroy(id_map[i][r+load_dist]);
-				//var iid = instance_nearest(i*32,(r+load_dist)*32,obj_wall);
-				//instance_destroy(iid);
-				destroy_wall(i*32,(r+load_dist)*32);
-				create_map[i][r+load_dist] = 0;
-			}
-			else if (create_map[i][r+load_dist]==3){
-				instance_deactivate_object(id_map[i][r+load_dist])	
-			}
-		}
-		/*if(r+load_dist+1<98*32){
-			if(create_map[i][r+load_dist+1]==1){
-				instance_destroy(id_map[i][r+load_dist+1]);
-				create_map[i][r+load_dist+1] = 0;
-			}
-		}*/
-		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] <= 0 and create_map[i][r-load_dist] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			//var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
-			//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
-			create_wall(i * _spacing,(r-load_dist) * _spacing);
-			//id_map[i][(r-load_dist)] = iid;
-			create_map[i][r-load_dist] = 1;
-		}
-		/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 0 and create_map[i][r-load_dist-1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_wall);
-			id_map[i][(r-load_dist-1)] = iid;
-			create_map[i][r-load_dist-1] = 1;
-		}
-		if ((r-load_dist+1)>=0 and all_maps[(r-load_dist+1) div 98].final[i][(r-load_dist+1) mod 98] == 0 and create_map[i][r-load_dist+1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r-load_dist+1) * _spacing, layer, obj_wall);
-			id_map[i][(r-load_dist+1)] = iid;
-			create_map[i][r-load_dist+1] = 1;
-		}*/
-		
-		if ((r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 2 and create_map[i][r-load_dist] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing+_spacing, "enemy_layer", obj_monster1);
-			//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
-			id_map[i][(r-load_dist)] = iid;
-			create_map[i][r-load_dist] = 2;
-		}
-		if ( (r-load_dist)>=0 and all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 3 ){
-			if (create_map[i][r-load_dist] == 0){
+			/*if(r+load_dist+1<98*32){
+				if(create_map[i][r+load_dist+1]==1){
+					instance_destroy(id_map[i][r+load_dist+1]);
+					create_map[i][r+load_dist+1] = 0;
+				}
+			}*/
+			if ((r-load_dist+offset)>=0 and all_maps[(r-load_dist+offset) div 98].final[i][(r-load_dist+offset) mod 98] <= 0 and create_map[i][r-load_dist+offset] == 0){
 				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-				var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, "enemy_layer", obj_wolf);
+				//var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
+				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_wall);
+				create_wall(i * _spacing,(r-load_dist+offset) * _spacing);
+				//id_map[i][(r-load_dist)] = iid;
+				create_map[i][r-load_dist+offset] = 1;
+			}
+			/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 0 and create_map[i][r-load_dist-1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_wall);
+				id_map[i][(r-load_dist-1)] = iid;
+				create_map[i][r-load_dist-1] = 1;
+			}
+			if ((r-load_dist+1)>=0 and all_maps[(r-load_dist+1) div 98].final[i][(r-load_dist+1) mod 98] == 0 and create_map[i][r-load_dist+1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r-load_dist+1) * _spacing, layer, obj_wall);
+				id_map[i][(r-load_dist+1)] = iid;
+				create_map[i][r-load_dist+1] = 1;
+			}*/
+		
+			if ((r-load_dist+offset)>=0 and all_maps[(r-load_dist+offset) div 98].final[i][(r-load_dist+offset) mod 98] == 2 and create_map[i][r-load_dist+offset] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r-load_dist+offset) * _spacing+_spacing, "enemy_layer", obj_monster1);
 				//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
-				id_map[i][(r-load_dist)] = iid;
-				create_map[i][r-load_dist] = 3;
+				id_map[i][(r-load_dist+offset)] = iid;
+				create_map[i][r-load_dist+offset] = 2;
 			}
-			else if (create_map[i][r-load_dist] == 3){
-				show_debug_message("wolf activated top")
-				instance_activate_object(id_map[i][(r-load_dist)])	
+			if ( (r-load_dist+offset)>=0 and all_maps[(r-load_dist+offset) div 98].final[i][(r-load_dist+offset) mod 98] == 3 ){
+				if (create_map[i][r-load_dist+offset] == 0){
+					//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+					var iid = instance_create_layer(i * _spacing,(r-load_dist+offset) * _spacing, "enemy_layer", obj_wolf);
+					//instance_create_layer(i * _spacing,(r-load_dist) * _spacing, layer, obj_monster1);
+					id_map[i][(r-load_dist+offset)] = iid;
+					create_map[i][r-load_dist+offset] = 3;
+				}
+				else if (create_map[i][r-load_dist+offset] == 3){
+					show_debug_message("wolf activated top")
+					instance_activate_object(id_map[i][(r-load_dist+offset)])	
+				}
 			}
-		}
-		if ((r+load_dist)>=0 and  all_maps[(r-load_dist) div 98].final[i][(r-load_dist) mod 98] == 4){
-			if (create_map[i][r-load_dist] == 0){
-				var iid = instance_create_layer(i * _spacing,(r-load_dist) * _spacing, "enemy_layer", obj_centipede);
-				id_map[i][(r-load_dist)] = iid;
-				create_map[i][r-load_dist] = 4;
-			}
+			if ((r+load_dist+offset)>=0 and  all_maps[(r-load_dist+offset) div 98].final[i][(r-load_dist+offset) mod 98] == 4){
+				if (create_map[i][r-load_dist+offset] == 0){
+					var iid = instance_create_layer(i * _spacing,(r-load_dist+offset) * _spacing, "enemy_layer", obj_centipede);
+					id_map[i][(r-load_dist+offset)] = iid;
+					create_map[i][r-load_dist+offset] = 4;
+				}
 			
 			
+			}
+			/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 2 and create_map[i][r-load_dist-1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_monster1);
+				id_map[i][(r-load_dist-1)] = iid;
+				create_map[i][r-load_dist-1] = 1;
+			}
+			if ((r-load_dist+1)>=0 and all_maps[(r-load_dist+1) div 98].final[i][(r-load_dist+1) mod 98] == 2 and create_map[i][r-load_dist+1] == 0){
+				//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
+				var iid = instance_create_layer(i * _spacing,(r-load_dist+1) * _spacing, layer, obj_monster1);
+				id_map[i][(r-load_dist+1)] = iid;
+				create_map[i][r-load_dist+1] = 1;
+			}*/
 		}
-		/*if ((r-load_dist-1)>=0 and all_maps[(r-load_dist-1) div 98].final[i][(r-load_dist-1) mod 98] == 2 and create_map[i][r-load_dist-1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r-load_dist-1) * _spacing, layer, obj_monster1);
-			id_map[i][(r-load_dist-1)] = iid;
-			create_map[i][r-load_dist-1] = 1;
-		}
-		if ((r-load_dist+1)>=0 and all_maps[(r-load_dist+1) div 98].final[i][(r-load_dist+1) mod 98] == 2 and create_map[i][r-load_dist+1] == 0){
-			//instance_create_layer(col * _spacing, row * _spacing, layer, obj_wall);
-			var iid = instance_create_layer(i * _spacing,(r-load_dist+1) * _spacing, layer, obj_monster1);
-			id_map[i][(r-load_dist+1)] = iid;
-			create_map[i][r-load_dist+1] = 1;
-		}*/
 	}
 }
 

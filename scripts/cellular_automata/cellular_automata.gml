@@ -109,7 +109,13 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 				} else {
 					if (map[col + 15][row + 15] < 93 && map[col + 15][row + 15] > 87) {
 						// val between 87 and 93, 20% torch, 80% empty
-						final[col][row] = random(1) <= 0.2 ? 2 : 1;
+						//final[col][row] = random(1) <= 0.2 ? 2 : 1;
+						if(obj_map.current_level+1>=2){
+							final[col][row] = random(1) <= 0.2 ? 2 : 1;
+						}
+						else{
+							final[col][row] = 1;
+						}
 						empty_land_count = 0
 						empty_land_reverse_count = 0
 					} else if (map[col + 15][row + 15] <= 115 && map[col + 15][row + 15] > 65) {
@@ -119,7 +125,10 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 						if row!= 0 and final[col][row-1] == 0{
 							empty_land_reverse_count += 1
 							if empty_land_reverse_count == 4{
-								final[col][row] = 4 //obj_centipede
+								if(obj_map.current_level+1>=3){
+									final[col][row] = 4 //obj_centipede
+								}
+								//final[col][row] = 4 //obj_centipede
 								empty_land_reverse_count = 0
 							}
 						}
@@ -134,7 +143,10 @@ function cellular_automata(_width, _height, _spawn_chance, _prev = noone) constr
 						if row!= 0 and final[col][row-1] == 1{
 							empty_land_count += 1
 							if empty_land_count == 4{
-								final[col][row-1] = 3
+								//final[col][row-1] = 3
+								if(obj_map.current_level+1>=4){
+									final[col][row-1] = 3
+								}
 								empty_land_count = 0
 							}
 						}

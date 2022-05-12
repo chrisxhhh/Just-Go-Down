@@ -112,8 +112,10 @@ if (dig_rdy) {
 		var cl = tile_x div 32;
 		if (obj_map.all_maps[rw div 98].final[cl][rw mod 98] == -1) {
 			obj_attr.num_gold += 1;
+			inv_AddItem(ItemType.gold);
 		} else if (obj_map.all_maps[rw div 98].final[cl][rw mod 98] == -2) {
 			obj_attr.num_gem += 1;
+			inv_AddItem(ItemType.gem);
 		}
 		obj_map.all_maps[rw div 98].final[cl][rw mod 98] = 1;
 		
@@ -147,13 +149,17 @@ if (!global.pause) {
 
 	if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
 
-	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy)
+	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy && global.itemDefinitions[ItemType.gun,ItemProp.amount]>=1)
 	{
 		blt_rdy = false;
 		is_attacking = true;
 		sprite_index = spr_player_attack;
 		image_xscale = (mouse_x-x)/abs(mouse_x-x);
 	    instance_create_layer(x, y, "weapon", obj_bullet);
+		inv_RemoveItem(ItemType.gun);
+		if(global.itemDefinitions[ItemType.gun,ItemProp.amount]==0){
+			global.inventory[5] = ItemType.none;
+		}
 	    alarm[1] = blt_timer;
 		audio_play_sound(sound_bullet_launch, 0, false);
 		
@@ -164,7 +170,7 @@ if (!global.pause) {
 	  if (mouse_check_button(mb_left)){
 		  if !( instance_exists(obj_laser)){
 				is_attacking = true;
-				sprite_index = spr_player_attack;
+				//sprite_index = spr_player_attack;
 				image_xscale = (mouse_x-x)/abs(mouse_x-x);
 				instance_create_layer(x, y, "weapon", obj_laser);
 		  }
@@ -175,7 +181,7 @@ if (!global.pause) {
   
 	}
 	prevspd = vspd;
-	weapon = global.inventory[23];
+	weapon = global.inventory[5];
 	if(preweapon != weapon){
 		//weapon = (weapon+1) mod 4;
 		//weapon = global.inventory[23];
@@ -183,7 +189,7 @@ if (!global.pause) {
 		instance_destroy(obj_gun);
 		instance_create_layer(x,y,"weapon",obj_shovel);
 		}
-		else if (weapon == 2 or weapon == 3){
+		else if (weapon == 3){
 			instance_destroy(obj_shovel);
 			instance_create_layer(x,y,"weapon",obj_gun);
 		}

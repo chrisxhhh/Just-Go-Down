@@ -8,4 +8,6 @@ function inv_DeclareItemDefinitions(){
 	inv_AddItemDef(ItemType.shovel,spri_shovel,"shovel",0);
 	inv_AddItemDef(ItemType.gun,spri_gun,"gun",0);
 	inv_AddItemDef(ItemType.laser,spri_laser,"laser",0);
+	inv_AddItemDef(ItemType.gem,spri_gem,"gem",0);
+	inv_AddItemDef(ItemType.gold,spri_gold,"gold",0);
 }

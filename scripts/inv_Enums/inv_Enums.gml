@@ -6,6 +6,8 @@ function inv_Enums(){
 		shovel,
 		gun,
 		laser,
+		gem,
+		gold,
 		length
 	}
 

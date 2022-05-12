@@ -5,7 +5,7 @@ for(var i=1;i<10;i++){
 		var _itemType = global.inventory[i-1];
 		if((_itemType == ItemType.shovel)||(_itemType == ItemType.gun)||(_itemType == ItemType.laser)){
 			//global.inventory[i-1] = global.inventory[23];
-			global.inventory[23] = _itemType;
+			global.inventory[5] = _itemType;
 		}
 	}
 }
