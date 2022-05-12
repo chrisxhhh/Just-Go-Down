@@ -4,8 +4,9 @@ function inv_Enums(){
 	enum ItemType{
 		none,
 		shovel,
-		gun,
+		gun0,
 		laser,
+		gun,
 		gem,
 		gold,
 		length

@@ -112,10 +112,14 @@ if (dig_rdy) {
 		var cl = tile_x div 32;
 		if (obj_map.all_maps[rw div 98].final[cl][rw mod 98] == -1) {
 			obj_attr.num_gold += 1;
-			inv_AddItem(ItemType.gold);
+			for(var ii=0;ii<10;ii++){
+				inv_AddItem(ItemType.gold);
+			}
 		} else if (obj_map.all_maps[rw div 98].final[cl][rw mod 98] == -2) {
 			obj_attr.num_gem += 1;
-			inv_AddItem(ItemType.gem);
+			for(var ii=0;ii<10;ii++){
+				inv_AddItem(ItemType.gem);
+			}
 		}
 		obj_map.all_maps[rw div 98].final[cl][rw mod 98] = 1;
 		
@@ -148,8 +152,20 @@ if (!global.pause) {
 	}
 
 	if (vspd == 0 and prevspd==vspd) y += grav * !collided_bottom;
+	
+	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy)
+	{
+		blt_rdy = false;
+		is_attacking = true;
+		//sprite_index = spr_player_attack;
+		image_xscale = (mouse_x-x)/abs(mouse_x-x);
+	    instance_create_layer(x, y, "weapon", obj_bullet0);
+	    alarm[1] = blt_timer;
+		audio_play_sound(sound_bullet_launch, 0, false);
+		
+	}
 
-	if (mouse_check_button(mb_left) && weapon == 2 && blt_rdy && global.itemDefinitions[ItemType.gun,ItemProp.amount]>=1)
+	if (mouse_check_button(mb_left) && weapon == 4 && blt_rdy && global.itemDefinitions[ItemType.gun,ItemProp.amount]>=1)
 	{
 		blt_rdy = false;
 		is_attacking = true;
@@ -189,7 +205,7 @@ if (!global.pause) {
 		instance_destroy(obj_gun);
 		instance_create_layer(x,y,"weapon",obj_shovel);
 		}
-		else if (weapon == 3){
+		else if (weapon == 3 || weapon == 4 || weapon == 2){
 			instance_destroy(obj_shovel);
 			instance_create_layer(x,y,"weapon",obj_gun);
 		}

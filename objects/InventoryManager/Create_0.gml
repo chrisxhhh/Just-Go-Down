@@ -4,5 +4,6 @@
 inv_Initialize();
 inv_DeclareItemDefinitions();
 inv_AddItem(ItemType.shovel);
+inv_AddItem(ItemType.gun0);
 inv_AddItem(ItemType.gun);
 inv_AddItem(ItemType.laser);
