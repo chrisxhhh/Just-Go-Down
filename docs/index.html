@@ -67,19 +67,84 @@
                width: 100%;
                height: 100%;
             }
+
+            .play-btn{
+                width: 100px;
+                height: 100px;
+                background: radial-gradient( rgba(255, 0, 128, 0.8) 60%, rgba(255, 255, 255, 1) 62%);
+                border-radius: 50%;
+                position: absolute;
+                left: 45%;
+                top: 40%;
+                display: block;
+                /*margin: 100px auto;*/
+                box-shadow: 0px 0px 25px 3px rgba(255, 0, 128, 0.8);
+            }
+
+
+            /* triangle */
+            .play-btn::after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                -webkit-transform: translateX(-40%) translateY(-50%);
+                transform: translateX(-40%) translateY(-50%);
+                transform-origin: center center;
+                width: 0;
+                height: 0;
+                border-top: 15px solid transparent;
+                border-bottom: 15px solid transparent;
+                border-left: 25px solid #fff;
+                z-index: 100;
+                -webkit-transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+                transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+
+            /* pulse wave */
+            .play-btn:before{
+                content: "";
+                position: absolute;
+                width: 150%;
+                height: 150%;
+                -webkit-animation-delay: 0s;
+                animation-delay: 0s;
+                -webkit-animation: pulsate1 2s;
+                animation: pulsate1 2s;
+                -webkit-animation-direction: forwards;
+                animation-direction: forwards;
+                -webkit-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+                -webkit-animation-timing-function: steps;
+                animation-timing-function: steps;
+                opacity: 1;
+                border-radius: 50%;
+                border: 5px solid rgba(255, 255, 255, .75);
+                top: -30%;
+                left: -30%;
+                background: rgba(198, 16, 0, 0);
+            }
         </style>
     </head>
 
     <body>
         <div class="gm4html5_div_class" id="gm4html5_div_id">
+            <a class="play-btn" id = "btn"></a>
             <!-- Create the canvas element the game draws to -->
-            <canvas id="canvas" width="960" height="640" >
+            <canvas id="canvas" width="960" height="640"  style="position: absolute; top: 50%; left: 50%; bottom: -50%; right: -50%; transform: translate(-50%, -50%);" >
                      <p>Your browser doesn't support HTML5 canvas.</p>
             </canvas>
         </div>
-
+        
+        <script>
+            var el = document.getElementById("btn")
+                el.onclick = function() {
+                GameMaker_Init();
+                el.remove();
+            }
+        </script>
         <!-- Run the game code -->
-        <script type="text/javascript" src="html5game/jgd0505_2.js?CPIYB=1558508661"></script>
+        <script type="text/javascript" src="html5game/jgd0505_2.js?YWMYB=359212219"></script>
         <script>window.onload = GameMaker_Init;</script>
     </body>
 </html>
