@@ -10,7 +10,7 @@
   "option_html5_localrunalert": true,
   "option_html5_index": "use_default",
   "option_html5_loadingbar": "Use Default",
-  "option_html5_jsprepend": "if(typeof AudioContext != \"undefined\" || typeof webkitAudioContext != \"undefined\") {\n   var resumeAudio = function() {\n      if(typeof g_WebAudioContext == \"undefined\" || g_WebAudioContext == null) return;\n      if(g_WebAudioContext.state == \"suspended\") g_WebAudioContext.resume();\n      document.removeEventListener(\"click\", resumeAudio);\n   };\n   document.addEventListener(\"click\", resumeAudio);\n}\n",
+  "option_html5_jsprepend": "\n",
   "option_html5_icon": "${base_options_dir}/html5/fav.ico",
   "option_html5_allow_fullscreen": true,
   "option_html5_interpolate_pixels": true,
